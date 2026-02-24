@@ -63,17 +63,17 @@ Made with ❤️ for audio professionals.
 ```bash
 # Copy to Companion modules directory
 # macOS:
-cp mackie-dlz-creator-companion-1.0.0.tgz ~/Library/Application\ Support/companion-modules/
+cp dlz-creator-companion-1.0.0.tgz ~/Library/Application\ Support/companion-modules/
 
 # Windows:
-copy mackie-dlz-creator-companion-1.0.0.tgz %APPDATA%\companion-modules\
+copy dlz-creator-companion-1.0.0.tgz %APPDATA%\companion-modules\
 
 # Linux:
-cp mackie-dlz-creator-companion-1.0.0.tgz ~/.local/share/companion-modules/
+cp dlz-creator-companion-1.0.0.tgz ~/.local/share/companion-modules/
 
 # Extract and restart Companion
 cd [companion-modules directory]
-tar -xzf mackie-dlz-creator-companion-1.0.0.tgz
+tar -xzf dlz-creator-companion-1.0.0.tgz
 ```
 
 ## Configuration
@@ -261,7 +261,7 @@ Visual indicators that change button appearance based on mixer state:
 ```bash
 # Clone repository
 git clone [repository-url]
-cd companion-module-mackie-dlz-creator
+cd dlz-creator-companion
 
 # Install dependencies
 npm install

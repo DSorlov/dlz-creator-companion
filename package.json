@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node test/dev-server.js",
     "package": "node scripts/package.js",
-    "prepackage": "npm install --production"
+    "prepackage": "npm install --omit=dev"
   },
   "keywords": [
     "companion",

@@ -110,4 +110,4 @@ Complete feature implementation for Mackie DLZ Creator control.
 
 - **1.0.0** (2025-02-23) - Initial complete release
 
-[1.0.0]: https://github.com/dsorlov/mackie-dlz-creator-companion/releases/tag/v1.0.0
+[1.0.0]: https://github.com/dsorlov/dlz-creator-companion/releases/tag/v1.0.0

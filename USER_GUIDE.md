@@ -56,12 +56,12 @@ The DLZ Creator has 4 input channels with full processing.
 - **Use**: Main mix level for each input
 
 **Variables**:
-- `$(mackie-dlz-creator:input_1_level)` - Shows percentage
-- `$(mackie-dlz-creator:input_1_level_db)` - Shows dB value
+- `$(dlzcreator:input_1_level)` - Shows percentage
+- `$(dlzcreator:input_1_level_db)` - Shows dB value
 
 **Example Button**:
 ```
-Text: IN 1\n$(mackie-dlz-creator:input_1_level_db)
+Text: IN 1\n$(dlzcreator:input_1_level_db)
 Action: Set Fader Level → Input 1 → 75%
 ```
 
@@ -283,8 +283,8 @@ Input 4 (Phone): Aux 1 Send = 0% (don't send to monitor)
 - **Mute Aux Bus** - Mute entire aux output
 
 **Variables**:
-- `$(mackie-dlz-creator:aux_1_fader)`
-- `$(mackie-dlz-creator:aux_1_mute)`
+- `$(dlzcreator:aux_1_fader)`
+- `$(dlzcreator:aux_1_mute)`
 
 ### FX Sends (2 units)
 
@@ -374,15 +374,15 @@ Play audio files from USB/SD card.
 - **Player Seek** - Jump to position (seconds or percentage)
 
 **Variables**:
-- `$(mackie-dlz-creator:player_1_status)` - Playing/Paused/Stopped
-- `$(mackie-dlz-creator:player_1_position)` - Current time (mm:ss)
+- `$(dlzcreator:player_1_status)` - Playing/Paused/Stopped
+- `$(dlzcreator:player_1_position)` - Current time (mm:ss)
 
 **Feedback**: Player Playing
 - Button highlights during playback
 
 **Example: Play Button**
 ```
-Text: PLAY\n$(mackie-dlz-creator:player_1_position)
+Text: PLAY\n$(dlzcreator:player_1_position)
 Actions:
   Down: Player Play → Player 1
   Up: Player Pause → Player 1
@@ -457,8 +457,8 @@ Record your mix to USB drive, SD card, or computer.
 - **Set Recording Destination** - USB/SD/Computer
 
 **Variables**:
-- `$(mackie-dlz-creator:recording_status)` - Recording/Paused/Stopped
-- `$(mackie-dlz-creator:recording_time)` - Duration (hh:mm:ss)
+- `$(dlzcreator:recording_status)` - Recording/Paused/Stopped
+- `$(dlzcreator:recording_time)` - Duration (hh:mm:ss)
 
 **Feedback**: Recording Active
 - Button turns red when recording
@@ -472,7 +472,7 @@ Record your mix to USB drive, SD card, or computer.
 
 **Example: Record Button**
 ```
-Text: REC\n$(mackie-dlz-creator:recording_time)
+Text: REC\n$(dlzcreator:recording_time)
 Actions:
   Down: Start Recording
   Up: Stop Recording
@@ -610,7 +610,7 @@ Network audio distribution to video production systems.
 
 **Feedback**: NDI Enabled (Blue)
 
-**Variable**: `$(mackie-dlz-creator:ndi_status)`
+**Variable**: `$(dlzcreator:ndi_status)`
 
 **Workflow**:
 1. Set device name (e.g., "Studio A Mixer")
@@ -635,7 +635,7 @@ Wireless audio connectivity.
 
 **Feedback**: Bluetooth Connected (Blue)
 
-**Variable**: `$(mackie-dlz-creator:bluetooth_status)`
+**Variable**: `$(dlzcreator:bluetooth_status)`
 - Disabled / Unpaired / Paired / Connected
 
 **Workflow**:
@@ -675,7 +675,7 @@ Wireless audio connectivity.
 ## Variables Reference
 
 ### Format
-All variables: `$(mackie-dlz-creator:variable_name)`
+All variables: `$(dlzcreator:variable_name)`
 
 ### Input Channels (1-4)
 - `input_X_level` - Level percentage
