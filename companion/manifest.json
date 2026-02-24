@@ -1,0 +1,22 @@
+{
+	"manifest_version": 1,
+	"id": "dlz-creator",
+	"name": "dlz-creator",
+	"manufacturer": "Mackie",
+	"products": ["DLZ Creator"],
+	"keywords": ["mackie", "dlz", "creator", "mixer", "audio", "digital mixer"],
+	"shortname": "dlzcreator",
+	"description": "Control Mackie DLZ Creator digital mixer",
+	"version": "1.0.0",
+	"license": "MIT",
+	"repository": "https://github.com/dsorlov/dlz-creator-companion",
+	"bugs": "https://github.com/dsorlov/dlz-creator-companion/issues",
+	"maintainers": ["@dsorlov"],
+	"runtime": {
+		"type": "node18",
+		"api": "nodejs-ipc",
+		"apiVersion": "1.0.0",
+		"entrypoint": "../src/index.js"
+	},
+	"legacyIds": []
+}
