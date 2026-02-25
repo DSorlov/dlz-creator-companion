@@ -1,6 +1,6 @@
 {
   "name": "dlz-creator-companion",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Bitfocus Companion module for Mackie DLZ Creator",
   "main": "src/index.js",
   "scripts": {

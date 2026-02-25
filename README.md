@@ -282,6 +282,10 @@ npm run test
 # See Companion documentation for module development
 ```
 
+## Detailed configuration and usage
+
+See [USER_GUIDE.md](USER_GUIDE.md) for detailed config and usage instructions
+
 ## Technical Details
 
 - **Protocol**: Socket.IO over WebSocket
