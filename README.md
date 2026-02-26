@@ -4,7 +4,7 @@ Control module for the Mackie DLZ Creator digital mixer, providing complete cont
 
 This module is not affiliated with, endorsed by, or supported by Mackie or LOUD Audio, LLC. Mackie and DLZ Creator are trademarks of LOUD Audio, LLC.
 
-The module is untested in many parts and still a work in progress. Any help is apprechiated to make the details work. 
+The module is untested in many parts and still a work in progress. Any help is apprechiated to make the details work.
 
 Made with ❤️ for audio professionals.
 
