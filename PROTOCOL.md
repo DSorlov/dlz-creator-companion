@@ -37,6 +37,7 @@ socket.emit(eventType, messageData)
 ### Value Ranges
 
 Most control values are normalized to **0.0 - 1.0** range:
+
 - `0.0` = Minimum/Off
 - `1.0` = Maximum/On
 - `0.5` = Center (for pan)
@@ -50,6 +51,7 @@ Channels are identified using dot notation:
 ```
 
 **Types**:
+
 - `i` = Input channels (0-3)
 - `p` = Player channels (0-2)
 - `m` = Master
@@ -57,6 +59,7 @@ Channels are identified using dot notation:
 - `fx` = FX returns (0-1)
 
 **Examples**:
+
 - `i.0.mix` = Input 1 fader
 - `p.1.mute` = Player 2 mute
 - `m.mix` = Master fader
@@ -74,14 +77,15 @@ Main control message for all mixer parameters.
 
 ```javascript
 socket.emit('channelCtl', {
-  id: 'channel.parameter',
-  value: numberValue
+	id: 'channel.parameter',
+	value: numberValue,
 })
 ```
 
 #### Examples
 
 **Set Input 1 Fader to 75%**:
+
 ```javascript
 {
   id: 'i.0.mix',
@@ -90,6 +94,7 @@ socket.emit('channelCtl', {
 ```
 
 **Mute Input 2**:
+
 ```javascript
 {
   id: 'i.1.mute',
@@ -98,6 +103,7 @@ socket.emit('channelCtl', {
 ```
 
 **Set Master Pan to Center**:
+
 ```javascript
 {
   id: 'm.pan',
@@ -107,14 +113,14 @@ socket.emit('channelCtl', {
 
 #### Common Parameters
 
-| Parameter | Range | Description |
-|-----------|-------|-------------|
-| `mix` | 0.0-1.0 | Channel fader level |
-| `mute` | 0/1 | Mute state (0=unmuted, 1=muted) |
-| `solo` | 0/1 | Solo state |
-| `pan` | 0.0-1.0 | Pan position (0=left, 0.5=center, 1=right) |
-| `gain` | 0.0-1.0 | Input gain (0-60dB) |
-| `phantom` | 0/1 | Phantom power +48V |
+| Parameter | Range   | Description                                |
+| --------- | ------- | ------------------------------------------ |
+| `mix`     | 0.0-1.0 | Channel fader level                        |
+| `mute`    | 0/1     | Mute state (0=unmuted, 1=muted)            |
+| `solo`    | 0/1     | Solo state                                 |
+| `pan`     | 0.0-1.0 | Pan position (0=left, 0.5=center, 1=right) |
+| `gain`    | 0.0-1.0 | Input gain (0-60dB)                        |
+| `phantom` | 0/1     | Phantom power +48V                         |
 
 ---
 
@@ -123,6 +129,7 @@ socket.emit('channelCtl', {
 #### EQ Parameters
 
 **High-Pass Filter**:
+
 ```javascript
 {
   id: 'i.0.hpf.freq',
@@ -131,6 +138,7 @@ socket.emit('channelCtl', {
 ```
 
 **EQ Bands** (1, 2, 3):
+
 ```javascript
 // Frequency (logarithmic 20Hz-20kHz)
 { id: 'i.0.eq1.freq', value: 0.0-1.0 }
@@ -215,6 +223,7 @@ socket.emit('channelCtl', {
 #### Aux Sends
 
 **Per-Channel Aux Send**:
+
 ```javascript
 // Send level (0.0-1.0)
 { id: 'i.0.aux.0.send', value: 0.75 }
@@ -224,6 +233,7 @@ socket.emit('channelCtl', {
 ```
 
 **Aux Bus Master**:
+
 ```javascript
 // Aux bus fader
 { id: 'a.0.mix', value: 0.85 }
@@ -290,27 +300,27 @@ socket.emit('channelCtl', {
 ```javascript
 // Play
 socket.emit('playerCtl', {
-  player: 0,  // Player index 0-2
-  command: 'play'
+	player: 0, // Player index 0-2
+	command: 'play',
 })
 
 // Pause
 socket.emit('playerCtl', {
-  player: 0,
-  command: 'pause'
+	player: 0,
+	command: 'pause',
 })
 
 // Stop
 socket.emit('playerCtl', {
-  player: 0,
-  command: 'stop'
+	player: 0,
+	command: 'stop',
 })
 
 // Seek (position in seconds)
 socket.emit('playerCtl', {
-  player: 0,
-  command: 'seek',
-  position: 30.5
+	player: 0,
+	command: 'seek',
+	position: 30.5,
 })
 ```
 
@@ -323,22 +333,22 @@ socket.emit('playerCtl', {
 ```javascript
 // Trigger sample
 socket.emit('sampleCtl', {
-  bank: 0,    // Bank 0-7 (A-H)
-  pad: 0,     // Pad 0-5
-  command: 'trigger'
+	bank: 0, // Bank 0-7 (A-H)
+	pad: 0, // Pad 0-5
+	command: 'trigger',
 })
 
 // Stop sample
 socket.emit('sampleCtl', {
-  bank: 0,
-  pad: 0,
-  command: 'stop'
+	bank: 0,
+	pad: 0,
+	command: 'stop',
 })
 
 // Select bank
 socket.emit('sampleCtl', {
-  command: 'selectBank',
-  bank: 1  // Bank 0-7
+	command: 'selectBank',
+	bank: 1, // Bank 0-7
 })
 ```
 
@@ -372,18 +382,18 @@ socket.emit('sampleCtl', {
 ```javascript
 // Start recording
 socket.emit('recordCtl', {
-  command: 'start',
-  destination: 'usb'  // 'usb', 'sd', 'computer'
+	command: 'start',
+	destination: 'usb', // 'usb', 'sd', 'computer'
 })
 
 // Stop recording
 socket.emit('recordCtl', {
-  command: 'stop'
+	command: 'stop',
 })
 
 // Pause recording
 socket.emit('recordCtl', {
-  command: 'pause'
+	command: 'pause',
 })
 ```
 
@@ -394,14 +404,14 @@ socket.emit('recordCtl', {
 ```javascript
 // Recall snapshot
 socket.emit('snapshotCtl', {
-  command: 'recall',
-  snapshot: 0  // Snapshot 0-4
+	command: 'recall',
+	snapshot: 0, // Snapshot 0-4
 })
 
 // Save snapshot
 socket.emit('snapshotCtl', {
-  command: 'save',
-  snapshot: 0
+	command: 'save',
+	snapshot: 0,
 })
 ```
 
@@ -514,8 +524,8 @@ Sent approximately every 100ms with real-time meter values.
 
 ```javascript
 socket.on('VU', (data) => {
-  // data contains meter values for all channels
-  // Format: { 'i.0.vu': value, 'i.1.vu': value, ... }
+	// data contains meter values for all channels
+	// Format: { 'i.0.vu': value, 'i.1.vu': value, ... }
 })
 ```
 
@@ -527,8 +537,8 @@ Sent whenever a parameter changes.
 
 ```javascript
 socket.on('channelState', (data) => {
-  // data contains updated parameter values
-  // Format: { id: 'i.0.mix', value: 0.75 }
+	// data contains updated parameter values
+	// Format: { id: 'i.0.mix', value: 0.75 }
 })
 ```
 
@@ -536,10 +546,10 @@ socket.on('channelState', (data) => {
 
 ```javascript
 socket.on('playerState', (data) => {
-  // data.player: 0-2
-  // data.status: 'playing', 'paused', 'stopped'
-  // data.position: seconds
-  // data.duration: seconds
+	// data.player: 0-2
+	// data.status: 'playing', 'paused', 'stopped'
+	// data.position: seconds
+	// data.duration: seconds
 })
 ```
 
@@ -547,9 +557,9 @@ socket.on('playerState', (data) => {
 
 ```javascript
 socket.on('recordState', (data) => {
-  // data.status: 'recording', 'paused', 'stopped'
-  // data.time: seconds
-  // data.destination: 'usb', 'sd', 'computer'
+	// data.status: 'recording', 'paused', 'stopped'
+	// data.time: seconds
+	// data.destination: 'usb', 'sd', 'computer'
 })
 ```
 
@@ -557,9 +567,9 @@ socket.on('recordState', (data) => {
 
 ```javascript
 socket.on('sampleState', (data) => {
-  // data.bank: 0-7
-  // data.pad: 0-5
-  // data.playing: true/false
+	// data.bank: 0-7
+	// data.pad: 0-5
+	// data.playing: true/false
 })
 ```
 
@@ -567,10 +577,10 @@ socket.on('sampleState', (data) => {
 
 ```javascript
 socket.on('systemState', (data) => {
-  // data contains system state variables
-  // Examples:
-  // { 'bluetooth.status': 3 }  // 0=Disabled, 1=Unpaired, 2=Paired, 3=Connected
-  // { 'ndi.enable': 1 }
+	// data contains system state variables
+	// Examples:
+	// { 'bluetooth.status': 3 }  // 0=Disabled, 1=Unpaired, 2=Paired, 3=Connected
+	// { 'ndi.enable': 1 }
 })
 ```
 
@@ -583,14 +593,14 @@ socket.on('systemState', (data) => {
 ```javascript
 // Linear (0.0-1.0) to dB
 function linearToDb(linear) {
-  if (linear <= 0) return '-∞';
-  return (20 * Math.log10(linear)).toFixed(1);
+	if (linear <= 0) return '-∞'
+	return (20 * Math.log10(linear)).toFixed(1)
 }
 
 // dB to Linear (0.0-1.0)
 function dbToLinear(db) {
-  if (db <= -80) return 0;
-  return Math.pow(10, db / 20);
+	if (db <= -80) return 0
+	return Math.pow(10, db / 20)
 }
 ```
 
@@ -601,20 +611,20 @@ Many parameters use logarithmic scaling for musical/natural feel.
 ```javascript
 // Frequency (20 Hz - 20 kHz)
 function linearToFreq(linear, min = 20, max = 20000) {
-  return min * Math.pow(max / min, linear);
+	return min * Math.pow(max / min, linear)
 }
 
 function freqToLinear(freq, min = 20, max = 20000) {
-  return Math.log(freq / min) / Math.log(max / min);
+	return Math.log(freq / min) / Math.log(max / min)
 }
 
 // Time (ms)
 function linearToTime(linear, min, max) {
-  return min * Math.pow(max / min, linear);
+	return min * Math.pow(max / min, linear)
 }
 
 function timeToLinear(time, min, max) {
-  return Math.log(time / min) / Math.log(max / min);
+	return Math.log(time / min) / Math.log(max / min)
 }
 ```
 
@@ -638,27 +648,27 @@ linearToTime(0.7, 10, 2000) // = 251.18 ms
 ### Initial Connection
 
 ```javascript
-const io = require('socket.io-client');
+const io = require('socket.io-client')
 
 const socket = io(`http://${host}:${port}`, {
-  reconnection: true,
-  reconnectionDelay: 1000,
-  reconnectionDelayMax: 5000,
-  reconnectionAttempts: Infinity,
-  transports: ['websocket', 'polling']
-});
+	reconnection: true,
+	reconnectionDelay: 1000,
+	reconnectionDelayMax: 5000,
+	reconnectionAttempts: Infinity,
+	transports: ['websocket', 'polling'],
+})
 
 socket.on('connect', () => {
-  console.log('Connected to DLZ Creator');
-});
+	console.log('Connected to DLZ Creator')
+})
 
 socket.on('disconnect', () => {
-  console.log('Disconnected from DLZ Creator');
-});
+	console.log('Disconnected from DLZ Creator')
+})
 
 socket.on('connect_error', (error) => {
-  console.error('Connection error:', error);
-});
+	console.error('Connection error:', error)
+})
 ```
 
 ### Reconnection Strategy
@@ -709,25 +719,25 @@ The module implements automatic reconnection with exponential backoff:
 
 ```javascript
 // Simple connection test
-const socket = io('http://192.168.8.30:80');
+const socket = io('http://192.168.8.30:80')
 
 socket.on('connect', () => {
-  console.log('Connected!');
-  
-  // Test: Mute Input 1
-  socket.emit('channelCtl', {
-    id: 'i.0.mute',
-    value: 1
-  });
-});
+	console.log('Connected!')
+
+	// Test: Mute Input 1
+	socket.emit('channelCtl', {
+		id: 'i.0.mute',
+		value: 1,
+	})
+})
 
 socket.on('channelState', (data) => {
-  console.log('State update:', data);
-});
+	console.log('State update:', data)
+})
 
 socket.on('VU', (data) => {
-  console.log('VU meters:', data);
-});
+	console.log('VU meters:', data)
+})
 ```
 
 ### Monitoring Traffic
@@ -740,87 +750,87 @@ Use browser developer tools on `http://192.168.8.30/` to observe Socket.IO messa
 
 ### Input Channels (i.0 - i.3)
 
-| Parameter | Range | Description |
-|-----------|-------|-------------|
-| `mix` | 0.0-1.0 | Fader level |
-| `mute` | 0/1 | Mute state |
-| `solo` | 0/1 | Solo state |
-| `pan` | 0.0-1.0 | Pan position |
-| `gain` | 0.0-1.0 | Input gain (0-60dB) |
-| `phantom` | 0/1 | +48V phantom power |
-| `color` | 0-10 | Channel color |
-| `hpf.freq` | 0.0-1.0 | HPF frequency (20-700Hz) |
-| `eq1.freq` | 0.0-1.0 | EQ band 1 frequency |
-| `eq1.gain` | 0.0-1.0 | EQ band 1 gain (-12 to +12dB) |
-| `eq1.q` | 0.0-1.0 | EQ band 1 Q factor |
-| `eq2.freq` | 0.0-1.0 | EQ band 2 frequency |
-| `eq2.gain` | 0.0-1.0 | EQ band 2 gain |
-| `eq2.q` | 0.0-1.0 | EQ band 2 Q factor |
-| `eq3.freq` | 0.0-1.0 | EQ band 3 frequency |
-| `eq3.gain` | 0.0-1.0 | EQ band 3 gain |
-| `eq3.q` | 0.0-1.0 | EQ band 3 Q factor |
-| `eq.bypass` | 0/1 | EQ bypass |
-| `comp.thresh` | 0.0-1.0 | Compressor threshold |
-| `comp.ratio` | 0.0-1.0 | Compressor ratio |
-| `comp.attack` | 0.0-1.0 | Compressor attack |
-| `comp.release` | 0.0-1.0 | Compressor release |
-| `comp.makeup` | 0.0-1.0 | Compressor makeup gain |
-| `comp.bypass` | 0/1 | Compressor bypass |
-| `gate.thresh` | 0.0-1.0 | Gate threshold |
-| `gate.range` | 0.0-1.0 | Gate range |
-| `gate.attack` | 0.0-1.0 | Gate attack |
-| `gate.hold` | 0.0-1.0 | Gate hold |
-| `gate.release` | 0.0-1.0 | Gate release |
-| `gate.bypass` | 0/1 | Gate bypass |
-| `ds.thresh` | 0.0-1.0 | De-esser threshold |
-| `ds.freq` | 0.0-1.0 | De-esser frequency |
-| `ds.q` | 0.0-1.0 | De-esser Q |
-| `ds.range` | 0.0-1.0 | De-esser range |
-| `ds.bypass` | 0/1 | De-esser bypass |
-| `aux.0.send` | 0.0-1.0 | Aux 1 send level |
-| `aux.1.send` | 0.0-1.0 | Aux 2 send level |
-| `aux.2.send` | 0.0-1.0 | Aux 3 send level |
-| `aux.3.send` | 0.0-1.0 | Aux 4 send level |
-| `aux.0.mute` | 0/1 | Aux 1 send mute |
-| `aux.1.mute` | 0/1 | Aux 2 send mute |
-| `aux.2.mute` | 0/1 | Aux 3 send mute |
-| `aux.3.mute` | 0/1 | Aux 4 send mute |
-| `fx.0.send` | 0.0-1.0 | FX1 (Reverb) send |
-| `fx.1.send` | 0.0-1.0 | FX2 (Delay) send |
-| `autogain` | 0/1 | Auto-gain enable |
-| `automix.weight` | 0.0-1.0 | Auto-mix weight |
+| Parameter        | Range   | Description                   |
+| ---------------- | ------- | ----------------------------- |
+| `mix`            | 0.0-1.0 | Fader level                   |
+| `mute`           | 0/1     | Mute state                    |
+| `solo`           | 0/1     | Solo state                    |
+| `pan`            | 0.0-1.0 | Pan position                  |
+| `gain`           | 0.0-1.0 | Input gain (0-60dB)           |
+| `phantom`        | 0/1     | +48V phantom power            |
+| `color`          | 0-10    | Channel color                 |
+| `hpf.freq`       | 0.0-1.0 | HPF frequency (20-700Hz)      |
+| `eq1.freq`       | 0.0-1.0 | EQ band 1 frequency           |
+| `eq1.gain`       | 0.0-1.0 | EQ band 1 gain (-12 to +12dB) |
+| `eq1.q`          | 0.0-1.0 | EQ band 1 Q factor            |
+| `eq2.freq`       | 0.0-1.0 | EQ band 2 frequency           |
+| `eq2.gain`       | 0.0-1.0 | EQ band 2 gain                |
+| `eq2.q`          | 0.0-1.0 | EQ band 2 Q factor            |
+| `eq3.freq`       | 0.0-1.0 | EQ band 3 frequency           |
+| `eq3.gain`       | 0.0-1.0 | EQ band 3 gain                |
+| `eq3.q`          | 0.0-1.0 | EQ band 3 Q factor            |
+| `eq.bypass`      | 0/1     | EQ bypass                     |
+| `comp.thresh`    | 0.0-1.0 | Compressor threshold          |
+| `comp.ratio`     | 0.0-1.0 | Compressor ratio              |
+| `comp.attack`    | 0.0-1.0 | Compressor attack             |
+| `comp.release`   | 0.0-1.0 | Compressor release            |
+| `comp.makeup`    | 0.0-1.0 | Compressor makeup gain        |
+| `comp.bypass`    | 0/1     | Compressor bypass             |
+| `gate.thresh`    | 0.0-1.0 | Gate threshold                |
+| `gate.range`     | 0.0-1.0 | Gate range                    |
+| `gate.attack`    | 0.0-1.0 | Gate attack                   |
+| `gate.hold`      | 0.0-1.0 | Gate hold                     |
+| `gate.release`   | 0.0-1.0 | Gate release                  |
+| `gate.bypass`    | 0/1     | Gate bypass                   |
+| `ds.thresh`      | 0.0-1.0 | De-esser threshold            |
+| `ds.freq`        | 0.0-1.0 | De-esser frequency            |
+| `ds.q`           | 0.0-1.0 | De-esser Q                    |
+| `ds.range`       | 0.0-1.0 | De-esser range                |
+| `ds.bypass`      | 0/1     | De-esser bypass               |
+| `aux.0.send`     | 0.0-1.0 | Aux 1 send level              |
+| `aux.1.send`     | 0.0-1.0 | Aux 2 send level              |
+| `aux.2.send`     | 0.0-1.0 | Aux 3 send level              |
+| `aux.3.send`     | 0.0-1.0 | Aux 4 send level              |
+| `aux.0.mute`     | 0/1     | Aux 1 send mute               |
+| `aux.1.mute`     | 0/1     | Aux 2 send mute               |
+| `aux.2.mute`     | 0/1     | Aux 3 send mute               |
+| `aux.3.mute`     | 0/1     | Aux 4 send mute               |
+| `fx.0.send`      | 0.0-1.0 | FX1 (Reverb) send             |
+| `fx.1.send`      | 0.0-1.0 | FX2 (Delay) send              |
+| `autogain`       | 0/1     | Auto-gain enable              |
+| `automix.weight` | 0.0-1.0 | Auto-mix weight               |
 
 ### Player Channels (p.0 - p.2)
 
-| Parameter | Range | Description |
-|-----------|-------|-------------|
-| `mix` | 0.0-1.0 | Fader level |
-| `mute` | 0/1 | Mute state |
-| `solo` | 0/1 | Solo state |
-| `pan` | 0.0-1.0 | Pan position |
-| `color` | 0-10 | Channel color |
-| (All processing same as inputs) |||
+| Parameter                       | Range   | Description   |
+| ------------------------------- | ------- | ------------- |
+| `mix`                           | 0.0-1.0 | Fader level   |
+| `mute`                          | 0/1     | Mute state    |
+| `solo`                          | 0/1     | Solo state    |
+| `pan`                           | 0.0-1.0 | Pan position  |
+| `color`                         | 0-10    | Channel color |
+| (All processing same as inputs) |         |               |
 
 ### Master (m)
 
-| Parameter | Range | Description |
-|-----------|-------|-------------|
-| `mix` | 0.0-1.0 | Master fader |
-| `mute` | 0/1 | Master mute |
+| Parameter | Range   | Description  |
+| --------- | ------- | ------------ |
+| `mix`     | 0.0-1.0 | Master fader |
+| `mute`    | 0/1     | Master mute  |
 
 ### Aux Buses (a.0 - a.3)
 
-| Parameter | Range | Description |
-|-----------|-------|-------------|
-| `mix` | 0.0-1.0 | Aux master level |
-| `mute` | 0/1 | Aux mute |
-| `pan` | 0.0-1.0 | Aux pan |
+| Parameter | Range   | Description      |
+| --------- | ------- | ---------------- |
+| `mix`     | 0.0-1.0 | Aux master level |
+| `mute`    | 0/1     | Aux mute         |
+| `pan`     | 0.0-1.0 | Aux pan          |
 
 ### FX Returns (fx.0 - fx.1)
 
-| Parameter | Range | Description |
-|-----------|-------|-------------|
-| `mix` | 0.0-1.0 | FX return level |
+| Parameter | Range   | Description     |
+| --------- | ------- | --------------- |
+| `mix`     | 0.0-1.0 | FX return level |
 
 ---
 
@@ -828,25 +838,25 @@ Use browser developer tools on `http://192.168.8.30/` to observe Socket.IO messa
 
 ### Outgoing (Client → Device)
 
-| Event | Purpose |
-|-------|---------|
-| `channelCtl` | Control any mixer parameter |
-| `playerCtl` | Control media players |
-| `sampleCtl` | Control sample pads |
-| `recordCtl` | Control recording |
-| `snapshotCtl` | Recall/save snapshots |
-| `systemCtl` | System commands |
+| Event         | Purpose                     |
+| ------------- | --------------------------- |
+| `channelCtl`  | Control any mixer parameter |
+| `playerCtl`   | Control media players       |
+| `sampleCtl`   | Control sample pads         |
+| `recordCtl`   | Control recording           |
+| `snapshotCtl` | Recall/save snapshots       |
+| `systemCtl`   | System commands             |
 
 ### Incoming (Device → Client)
 
-| Event | Purpose |
-|-------|---------|
-| `VU` | Real-time meter values (~100ms) |
-| `channelState` | Parameter change notifications |
-| `playerState` | Player status updates |
-| `recordState` | Recording status |
-| `sampleState` | Sample playback status |
-| `systemState` | System status updates |
+| Event          | Purpose                         |
+| -------------- | ------------------------------- |
+| `VU`           | Real-time meter values (~100ms) |
+| `channelState` | Parameter change notifications  |
+| `playerState`  | Player status updates           |
+| `recordState`  | Recording status                |
+| `sampleState`  | Sample playback status          |
+| `systemState`  | System status updates           |
 
 ---
 
@@ -855,6 +865,7 @@ Use browser developer tools on `http://192.168.8.30/` to observe Socket.IO messa
 The DLZ Creator does not return explicit error codes. Invalid commands are silently ignored.
 
 **Common Issues**:
+
 - Invalid channel: Ignored
 - Out-of-range value: Clamped to valid range
 - Unknown parameter: Ignored

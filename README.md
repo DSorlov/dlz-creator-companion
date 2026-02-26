@@ -7,6 +7,7 @@ Made with ❤️ for audio professionals.
 ## Features
 
 ### 🎚️ Complete Mixer Control
+
 - **4 Input Channels** - Full control with faders, mute, solo, pan, gain, phantom power
 - **3 Media Players** - Play, pause, stop, seek, and monitor playback
 - **4 Aux Buses** - Individual sends per channel plus aux master controls
@@ -15,12 +16,14 @@ Made with ❤️ for audio professionals.
 - **Master Section** - Master fader, mute, and delay compensation
 
 ### 🎛️ Professional Processing
+
 - **4-Band EQ** - High-pass filter + 3 parametric bands per channel
 - **Compressor** - Full dynamics control with threshold, ratio, attack, release, makeup
 - **Noise Gate** - Threshold, range, attack, hold, release per channel
 - **De-Esser** - Frequency-selective compression for sibilance control
 
 ### 🎪 Advanced Features
+
 - **5 Snapshots** - Save and recall complete mixer scenes
 - **Recording Control** - Start/stop/pause recording to USB/SD/Computer
 - **Auto-Mix** - Automatic gain sharing with per-channel weight control
@@ -29,6 +32,7 @@ Made with ❤️ for audio professionals.
 - **Bluetooth Control** - Wireless audio connectivity
 
 ### 📊 Real-Time Monitoring
+
 - **VU Meters** - All channels with peak detection
 - **36+ Variables** - Channel levels, player status, recording state, system info
 - **16 Feedbacks** - Visual indicators for mute, solo, processing, playback states
@@ -37,6 +41,7 @@ Made with ❤️ for audio professionals.
 ## Installation
 
 ### Requirements
+
 - Bitfocus Companion v3.0 or later
 - Mackie DLZ Creator with network connectivity
 - Both devices on the same network
@@ -128,6 +133,7 @@ The module includes ready-to-use presets for common operations:
 ## Available Actions
 
 ### Channel Control
+
 - Set Fader/Mix Level
 - Mute/Unmute Channel
 - Solo/Unsolo Channel
@@ -137,32 +143,38 @@ The module includes ready-to-use presets for common operations:
 - Set Channel Color
 
 ### Processing
+
 - EQ: Set HPF, Band 1/2/3 Frequency/Gain/Q, Bypass
 - Compressor: Threshold, Ratio, Attack, Release, Makeup, Bypass
 - Noise Gate: Threshold, Range, Attack, Hold, Release, Bypass
 - De-Esser: Threshold, Frequency, Q, Range, Bypass
 
 ### Routing & Mixing
+
 - Set Aux Send Level (per channel)
 - Set FX Send Level (per channel)
 - Mute Aux Send
 - Set Aux Bus Level/Pan/Mute
 
 ### Effects
+
 - Reverb: Pre-delay, Time, Low-Pass Filter, Bypass
 - Delay: Time, Feedback, Low-Pass Filter, Bypass
 
 ### Media & Samples
+
 - Player: Play, Pause, Stop, Seek
 - Sample: Trigger, Stop, Set Mode (One-Shot/Loop/Hold/Bleep)
 - Sample: Volume, Fade Times, Start/End Points
 - Select Sample Bank, Mute Bank
 
 ### Recording
+
 - Start/Stop/Pause Recording
 - Set Recording Destination (USB/SD/Computer)
 
 ### Scenes & Automation
+
 - Recall Snapshot
 - Save Snapshot
 - Set Auto-Mix Enable/Weight
@@ -170,6 +182,7 @@ The module includes ready-to-use presets for common operations:
 - Set Master Delay
 
 ### System
+
 - NDI: Enable, Set Name, Scan Devices
 - Bluetooth: Enable, Pair, Disconnect
 - Set Screen/Button Brightness
@@ -181,6 +194,7 @@ The module includes ready-to-use presets for common operations:
 All variables use the format: `$(dlzcreator:variable_name)`
 
 ### Channel Variables (per Input/Player)
+
 - `input_X_level` - Channel level (0-100%)
 - `input_X_level_db` - Channel level in dB
 - `input_X_mute` - Muted/Unmuted
@@ -189,14 +203,17 @@ All variables use the format: `$(dlzcreator:variable_name)`
 - `input_X_vu` - VU meter value
 
 ### Player Variables
+
 - `player_X_status` - Playing/Paused/Stopped
 - `player_X_position` - Current position (mm:ss)
 
 ### Recording Variables
+
 - `recording_status` - Recording/Paused/Stopped
 - `recording_time` - Recording duration
 
 ### System Variables
+
 - `bluetooth_status` - Disabled/Unpaired/Paired/Connected
 - `ndi_status` - Enabled/Disabled
 - `automix_status` - Active/Inactive
@@ -224,6 +241,7 @@ Visual indicators that change button appearance based on mixer state:
 ### Connection Issues
 
 **"Connection Failed"**
+
 - Verify DLZ Creator is powered on
 - Check IP address in Companion settings
 - Ensure both devices on same network
@@ -231,6 +249,7 @@ Visual indicators that change button appearance based on mixer state:
 - Check firewall settings
 
 **"Disconnected" after working**
+
 - DLZ Creator may have restarted
 - Network interruption
 - Module will auto-reconnect
@@ -238,11 +257,13 @@ Visual indicators that change button appearance based on mixer state:
 ### Control Issues
 
 **Actions not working**
+
 - Check connection status (should be green)
 - Verify in Companion logs (Help → View Logs)
 - Try reconnecting (disable/enable connection)
 
 **Variables not updating**
+
 - VU meters update every 100ms
 - Other variables update on change
 - Check connection is established
@@ -250,6 +271,7 @@ Visual indicators that change button appearance based on mixer state:
 ### Performance
 
 **Lag or delay**
+
 - Network latency (check WiFi signal)
 - Multiple Companion instances
 - Companion on slow hardware

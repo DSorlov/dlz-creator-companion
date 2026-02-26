@@ -14,8 +14,8 @@ module.exports = {
 							{ id: 'p', label: 'Player' },
 							{ id: 'm', label: 'Master' },
 							{ id: 'a', label: 'Aux' },
-							{ id: 'f', label: 'FX' }
-						]
+							{ id: 'f', label: 'FX' },
+						],
 					},
 					{
 						type: 'number',
@@ -23,7 +23,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'number',
@@ -32,17 +32,17 @@ module.exports = {
 						default: 0.75,
 						min: 0,
 						max: 1,
-						step: 0.01
-					}
+						step: 0.01,
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					const key = `${channelType}.${channel}.mix`
 					instance.setParameter(key, action.options.level)
-				}
+				},
 			},
-			
+
 			muteChannel: {
 				name: 'Mute Channel',
 				options: [
@@ -54,8 +54,8 @@ module.exports = {
 						choices: [
 							{ id: 'i', label: 'Input' },
 							{ id: 'p', label: 'Player' },
-							{ id: 'm', label: 'Master' }
-						]
+							{ id: 'm', label: 'Master' },
+						],
 					},
 					{
 						type: 'number',
@@ -63,7 +63,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -73,27 +73,27 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Unmute' },
 							{ id: 1, label: 'Mute' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					let muteState = action.options.mute
-					
+
 					const key = `${channelType}.${channel}.mute`
-					
+
 					if (muteState === 2) {
 						// Toggle
 						const currentState = instance.state.channels[key] || false
 						muteState = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, muteState)
-				}
+				},
 			},
-			
+
 			soloChannel: {
 				name: 'Solo Channel',
 				options: [
@@ -104,8 +104,8 @@ module.exports = {
 						default: 'i',
 						choices: [
 							{ id: 'i', label: 'Input' },
-							{ id: 'p', label: 'Player' }
-						]
+							{ id: 'p', label: 'Player' },
+						],
 					},
 					{
 						type: 'number',
@@ -113,7 +113,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -123,27 +123,27 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Unsolo' },
 							{ id: 1, label: 'Solo' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					let soloState = action.options.solo
-					
+
 					const key = `${channelType}.${channel}.solo`
-					
+
 					if (soloState === 2) {
 						// Toggle
 						const currentState = instance.state.channels[key] || false
 						soloState = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, soloState)
-				}
+				},
 			},
-			
+
 			setPhantomPower: {
 				name: 'Set Phantom Power',
 				options: [
@@ -153,7 +153,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -163,26 +163,26 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Off' },
 							{ id: 1, label: 'On' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const channel = action.options.channel - 1
 					let phantomState = action.options.phantom
-					
+
 					const key = `i.${channel}.phantom`
-					
+
 					if (phantomState === 2) {
 						// Toggle
 						const currentState = instance.state.channels[key] || false
 						phantomState = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, phantomState)
-				}
+				},
 			},
-			
+
 			setGain: {
 				name: 'Set Input Gain',
 				options: [
@@ -192,7 +192,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'number',
@@ -201,16 +201,16 @@ module.exports = {
 						default: 0.5,
 						min: 0,
 						max: 1,
-						step: 0.01
-					}
+						step: 0.01,
+					},
 				],
 				callback: async (action) => {
 					const channel = action.options.channel - 1
 					const key = `i.${channel}.gain`
 					instance.setParameter(key, action.options.gain)
-				}
+				},
 			},
-			
+
 			setPan: {
 				name: 'Set Pan',
 				options: [
@@ -221,8 +221,8 @@ module.exports = {
 						default: 'i',
 						choices: [
 							{ id: 'i', label: 'Input' },
-							{ id: 'p', label: 'Player' }
-						]
+							{ id: 'p', label: 'Player' },
+						],
 					},
 					{
 						type: 'number',
@@ -230,7 +230,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'number',
@@ -239,15 +239,15 @@ module.exports = {
 						default: 0.5,
 						min: 0,
 						max: 1,
-						step: 0.01
-					}
+						step: 0.01,
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					const key = `${channelType}.${channel}.pan`
 					instance.setParameter(key, action.options.pan)
-				}
+				},
 			},
 
 			// === AUX SEND CONTROLS ===
@@ -262,8 +262,8 @@ module.exports = {
 						choices: [
 							{ id: 'i', label: 'Input' },
 							{ id: 'p', label: 'Player' },
-							{ id: 's', label: 'Samples' }
-						]
+							{ id: 's', label: 'Samples' },
+						],
 					},
 					{
 						type: 'number',
@@ -271,7 +271,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -282,8 +282,8 @@ module.exports = {
 							{ id: 0, label: 'Aux 1' },
 							{ id: 1, label: 'Aux 2' },
 							{ id: 2, label: 'Aux 3' },
-							{ id: 3, label: 'Aux 4' }
-						]
+							{ id: 3, label: 'Aux 4' },
+						],
 					},
 					{
 						type: 'number',
@@ -292,8 +292,8 @@ module.exports = {
 						default: 0.5,
 						min: 0,
 						max: 1,
-						step: 0.01
-					}
+						step: 0.01,
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
@@ -301,7 +301,7 @@ module.exports = {
 					const aux = action.options.auxBus
 					const key = `${channelType}.${channel}.aux.${aux}.value`
 					instance.setParameter(key, action.options.level)
-				}
+				},
 			},
 
 			muteAuxSend: {
@@ -315,8 +315,8 @@ module.exports = {
 						choices: [
 							{ id: 'i', label: 'Input' },
 							{ id: 'p', label: 'Player' },
-							{ id: 's', label: 'Samples' }
-						]
+							{ id: 's', label: 'Samples' },
+						],
 					},
 					{
 						type: 'number',
@@ -324,7 +324,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -335,8 +335,8 @@ module.exports = {
 							{ id: 0, label: 'Aux 1' },
 							{ id: 1, label: 'Aux 2' },
 							{ id: 2, label: 'Aux 3' },
-							{ id: 3, label: 'Aux 4' }
-						]
+							{ id: 3, label: 'Aux 4' },
+						],
 					},
 					{
 						type: 'dropdown',
@@ -346,25 +346,25 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Unmute' },
 							{ id: 1, label: 'Mute' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					const aux = action.options.auxBus
 					let muteState = action.options.mute
-					
+
 					const key = `${channelType}.${channel}.aux.${aux}.mute`
-					
+
 					if (muteState === 2) {
 						const currentState = instance.state.channels[key] || 0
 						muteState = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, muteState)
-				}
+				},
 			},
 
 			// === EQ CONTROLS ===
@@ -380,8 +380,8 @@ module.exports = {
 							{ id: 'i', label: 'Input' },
 							{ id: 'p', label: 'Player' },
 							{ id: 's', label: 'Samples' },
-							{ id: 'm', label: 'Master' }
-						]
+							{ id: 'm', label: 'Master' },
+						],
 					},
 					{
 						type: 'number',
@@ -389,7 +389,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -399,24 +399,24 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Active (EQ On)' },
 							{ id: 1, label: 'Bypass (EQ Off)' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					let bypassState = action.options.bypass
-					
+
 					const key = `${channelType}.${channel}.eq.bypass`
-					
+
 					if (bypassState === 2) {
 						const currentState = instance.state.channels[key] || 0
 						bypassState = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, bypassState)
-				}
+				},
 			},
 
 			setEQHighPass: {
@@ -431,8 +431,8 @@ module.exports = {
 							{ id: 'i', label: 'Input' },
 							{ id: 'p', label: 'Player' },
 							{ id: 's', label: 'Samples' },
-							{ id: 'm', label: 'Master' }
-						]
+							{ id: 'm', label: 'Master' },
+						],
 					},
 					{
 						type: 'number',
@@ -440,7 +440,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -449,8 +449,8 @@ module.exports = {
 						default: 0,
 						choices: [
 							{ id: 0, label: 'Active (On)' },
-							{ id: 1, label: 'Bypass (Off)' }
-						]
+							{ id: 1, label: 'Bypass (Off)' },
+						],
 					},
 					{
 						type: 'number',
@@ -458,16 +458,16 @@ module.exports = {
 						id: 'freq',
 						default: 80,
 						min: 20,
-						max: 700
-					}
+						max: 700,
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
-					
+
 					instance.setParameter(`${channelType}.${channel}.eq.hp.bypass`, action.options.bypass)
 					instance.setParameter(`${channelType}.${channel}.eq.hp.freq`, action.options.freq / 20000) // Normalize to 0-1
-				}
+				},
 			},
 
 			setEQBand: {
@@ -482,8 +482,8 @@ module.exports = {
 							{ id: 'i', label: 'Input' },
 							{ id: 'p', label: 'Player' },
 							{ id: 's', label: 'Samples' },
-							{ id: 'm', label: 'Master' }
-						]
+							{ id: 'm', label: 'Master' },
+						],
 					},
 					{
 						type: 'number',
@@ -491,7 +491,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -501,8 +501,8 @@ module.exports = {
 						choices: [
 							{ id: 1, label: 'Band 1 (Low)' },
 							{ id: 2, label: 'Band 2 (Mid)' },
-							{ id: 3, label: 'Band 3 (High)' }
-						]
+							{ id: 3, label: 'Band 3 (High)' },
+						],
 					},
 					{
 						type: 'number',
@@ -511,7 +511,7 @@ module.exports = {
 						default: 0,
 						min: -15,
 						max: 15,
-						step: 0.5
+						step: 0.5,
 					},
 					{
 						type: 'number',
@@ -519,7 +519,7 @@ module.exports = {
 						id: 'freq',
 						default: 1000,
 						min: 20,
-						max: 20000
+						max: 20000,
 					},
 					{
 						type: 'number',
@@ -528,24 +528,24 @@ module.exports = {
 						default: 1.0,
 						min: 0.1,
 						max: 15,
-						step: 0.1
-					}
+						step: 0.1,
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					const band = action.options.band
 					const prefix = `${channelType}.${channel}.eq.b${band}`
-					
+
 					// Normalize values to 0-1 range (backend expects normalized values)
-					const gainNorm = (action.options.gain + 15) / 30  // -15 to +15 -> 0 to 1
-					const freqNorm = Math.log(action.options.freq / 20) / Math.log(20000 / 20)  // Log scale
-					const qNorm = Math.log(action.options.q / 0.1) / Math.log(15 / 0.1)  // Log scale
-					
+					const gainNorm = (action.options.gain + 15) / 30 // -15 to +15 -> 0 to 1
+					const freqNorm = Math.log(action.options.freq / 20) / Math.log(20000 / 20) // Log scale
+					const qNorm = Math.log(action.options.q / 0.1) / Math.log(15 / 0.1) // Log scale
+
 					instance.setParameter(`${prefix}.gain`, gainNorm)
 					instance.setParameter(`${prefix}.freq`, freqNorm)
 					instance.setParameter(`${prefix}.q`, qNorm)
-				}
+				},
 			},
 
 			// === COMPRESSOR CONTROLS ===
@@ -561,8 +561,8 @@ module.exports = {
 							{ id: 'i', label: 'Input' },
 							{ id: 'p', label: 'Player' },
 							{ id: 's', label: 'Samples' },
-							{ id: 'm', label: 'Master' }
-						]
+							{ id: 'm', label: 'Master' },
+						],
 					},
 					{
 						type: 'number',
@@ -570,7 +570,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -580,24 +580,24 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Active (Comp On)' },
 							{ id: 1, label: 'Bypass (Comp Off)' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					let bypassState = action.options.bypass
-					
+
 					const key = `${channelType}.${channel}.comp.bypass`
-					
+
 					if (bypassState === 2) {
 						const currentState = instance.state.channels[key] || 0
 						bypassState = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, bypassState)
-				}
+				},
 			},
 
 			setCompressor: {
@@ -612,8 +612,8 @@ module.exports = {
 							{ id: 'i', label: 'Input' },
 							{ id: 'p', label: 'Player' },
 							{ id: 's', label: 'Samples' },
-							{ id: 'm', label: 'Master' }
-						]
+							{ id: 'm', label: 'Master' },
+						],
 					},
 					{
 						type: 'number',
@@ -621,7 +621,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'number',
@@ -629,7 +629,7 @@ module.exports = {
 						id: 'thresh',
 						default: -20,
 						min: -60,
-						max: 0
+						max: 0,
 					},
 					{
 						type: 'number',
@@ -638,7 +638,7 @@ module.exports = {
 						default: 3,
 						min: 1,
 						max: 20,
-						step: 0.1
+						step: 0.1,
 					},
 					{
 						type: 'number',
@@ -647,7 +647,7 @@ module.exports = {
 						default: 10,
 						min: 0.5,
 						max: 500,
-						step: 0.5
+						step: 0.5,
 					},
 					{
 						type: 'number',
@@ -656,7 +656,7 @@ module.exports = {
 						default: 100,
 						min: 10,
 						max: 2000,
-						step: 10
+						step: 10,
 					},
 					{
 						type: 'number',
@@ -665,27 +665,27 @@ module.exports = {
 						default: 3,
 						min: 0,
 						max: 24,
-						step: 0.5
-					}
+						step: 0.5,
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					const prefix = `${channelType}.${channel}.comp`
-					
+
 					// Normalize to 0-1
 					const threshNorm = (action.options.thresh + 60) / 60
 					const ratioNorm = Math.log(action.options.ratio) / Math.log(20)
 					const attackNorm = Math.log(action.options.attack / 0.5) / Math.log(500 / 0.5)
 					const releaseNorm = Math.log(action.options.release / 10) / Math.log(2000 / 10)
 					const gainNorm = action.options.gain / 24
-					
+
 					instance.setParameter(`${prefix}.thresh`, threshNorm)
 					instance.setParameter(`${prefix}.ratio`, ratioNorm)
 					instance.setParameter(`${prefix}.attack`, attackNorm)
 					instance.setParameter(`${prefix}.release`, releaseNorm)
 					instance.setParameter(`${prefix}.gain`, gainNorm)
-				}
+				},
 			},
 
 			// === FX CONTROLS ===
@@ -699,8 +699,8 @@ module.exports = {
 						default: 0,
 						choices: [
 							{ id: 0, label: 'FX 1' },
-							{ id: 1, label: 'FX 2' }
-						]
+							{ id: 1, label: 'FX 2' },
+						],
 					},
 					{
 						type: 'dropdown',
@@ -710,21 +710,21 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Active (On)' },
 							{ id: 1, label: 'Bypass (Off)' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					let bypassState = action.options.bypass
 					const key = `f.${action.options.unit}.bypass`
-					
+
 					if (bypassState === 2) {
 						const currentState = instance.state.channels[key] || 0
 						bypassState = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, bypassState)
-				}
+				},
 			},
 
 			setReverb: {
@@ -737,8 +737,8 @@ module.exports = {
 						default: 0,
 						choices: [
 							{ id: 0, label: 'FX 1' },
-							{ id: 1, label: 'FX 2' }
-						]
+							{ id: 1, label: 'FX 2' },
+						],
 					},
 					{
 						type: 'number',
@@ -747,7 +747,7 @@ module.exports = {
 						default: 0,
 						min: 0,
 						max: 50,
-						step: 1
+						step: 1,
 					},
 					{
 						type: 'number',
@@ -756,7 +756,7 @@ module.exports = {
 						default: 1000,
 						min: 200,
 						max: 8000,
-						step: 100
+						step: 100,
 					},
 					{
 						type: 'number',
@@ -765,22 +765,22 @@ module.exports = {
 						default: 10000,
 						min: 400,
 						max: 20000,
-						step: 100
-					}
+						step: 100,
+					},
 				],
 				callback: async (action) => {
 					const unit = action.options.unit
 					const prefix = `f.${unit}`
-					
+
 					// Normalize values
 					const predelayNorm = action.options.predelay / 50
 					const timeNorm = (action.options.time - 200) / (8000 - 200)
 					const lpfNorm = Math.log(action.options.lpf / 400) / Math.log(20000 / 400)
-					
+
 					instance.setParameter(`${prefix}.predelay`, predelayNorm)
 					instance.setParameter(`${prefix}.time`, timeNorm)
 					instance.setParameter(`${prefix}.lpf`, lpfNorm)
-				}
+				},
 			},
 
 			setDelay: {
@@ -793,8 +793,8 @@ module.exports = {
 						default: 0,
 						choices: [
 							{ id: 0, label: 'FX 1' },
-							{ id: 1, label: 'FX 2' }
-						]
+							{ id: 1, label: 'FX 2' },
+						],
 					},
 					{
 						type: 'number',
@@ -803,7 +803,7 @@ module.exports = {
 						default: 500,
 						min: 100,
 						max: 2000,
-						step: 10
+						step: 10,
 					},
 					{
 						type: 'number',
@@ -812,7 +812,7 @@ module.exports = {
 						default: 30,
 						min: 0,
 						max: 100,
-						step: 1
+						step: 1,
 					},
 					{
 						type: 'number',
@@ -821,22 +821,22 @@ module.exports = {
 						default: 8000,
 						min: 20,
 						max: 20000,
-						step: 100
-					}
+						step: 100,
+					},
 				],
 				callback: async (action) => {
 					const unit = action.options.unit
 					const prefix = `f.${unit}`
-					
+
 					// Normalize values
 					const timeNorm = (action.options.time - 100) / (2000 - 100)
 					const feedbackNorm = action.options.feedback / 100
 					const lpfNorm = Math.log(action.options.lpf / 20) / Math.log(20000 / 20)
-					
+
 					instance.setParameter(`${prefix}.time`, timeNorm)
 					instance.setParameter(`${prefix}.feedback`, feedbackNorm)
 					instance.setParameter(`${prefix}.lpf`, lpfNorm)
-				}
+				},
 			},
 
 			setFXSend: {
@@ -850,8 +850,8 @@ module.exports = {
 						choices: [
 							{ id: 'i', label: 'Input' },
 							{ id: 'p', label: 'Player' },
-							{ id: 's', label: 'Samples' }
-						]
+							{ id: 's', label: 'Samples' },
+						],
 					},
 					{
 						type: 'number',
@@ -859,7 +859,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -868,8 +868,8 @@ module.exports = {
 						default: 0,
 						choices: [
 							{ id: 0, label: 'FX 1' },
-							{ id: 1, label: 'FX 2' }
-						]
+							{ id: 1, label: 'FX 2' },
+						],
 					},
 					{
 						type: 'number',
@@ -878,8 +878,8 @@ module.exports = {
 						default: 0.5,
 						min: 0,
 						max: 1,
-						step: 0.01
-					}
+						step: 0.01,
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
@@ -887,7 +887,7 @@ module.exports = {
 					const fx = action.options.fxUnit
 					const key = `${channelType}.${channel}.fx.${fx}.value`
 					instance.setParameter(key, action.options.level)
-				}
+				},
 			},
 
 			// === SAMPLE BANK CONTROLS ===
@@ -907,8 +907,8 @@ module.exports = {
 							{ id: 4, label: 'Bank 5' },
 							{ id: 5, label: 'Bank 6' },
 							{ id: 6, label: 'Bank 7' },
-							{ id: 7, label: 'Bank 8' }
-						]
+							{ id: 7, label: 'Bank 8' },
+						],
 					},
 					{
 						type: 'dropdown',
@@ -921,9 +921,9 @@ module.exports = {
 							{ id: 2, label: 'Pad 3' },
 							{ id: 3, label: 'Pad 4' },
 							{ id: 4, label: 'Pad 5' },
-							{ id: 5, label: 'Pad 6' }
-						]
-					}
+							{ id: 5, label: 'Pad 6' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const bank = action.options.bank
@@ -931,7 +931,7 @@ module.exports = {
 					const key = `B.${bank}.${pad}.state`
 					// State 3 = PLAY (from backend: PLAY:3)
 					instance.setParameter(key, 3)
-				}
+				},
 			},
 
 			stopSample: {
@@ -950,8 +950,8 @@ module.exports = {
 							{ id: 4, label: 'Bank 5' },
 							{ id: 5, label: 'Bank 6' },
 							{ id: 6, label: 'Bank 7' },
-							{ id: 7, label: 'Bank 8' }
-						]
+							{ id: 7, label: 'Bank 8' },
+						],
 					},
 					{
 						type: 'dropdown',
@@ -964,9 +964,9 @@ module.exports = {
 							{ id: 2, label: 'Pad 3' },
 							{ id: 3, label: 'Pad 4' },
 							{ id: 4, label: 'Pad 5' },
-							{ id: 5, label: 'Pad 6' }
-						]
-					}
+							{ id: 5, label: 'Pad 6' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const bank = action.options.bank
@@ -974,7 +974,7 @@ module.exports = {
 					const key = `B.${bank}.${pad}.state`
 					// State 2 = STOP
 					instance.setParameter(key, 2)
-				}
+				},
 			},
 
 			stopAllSamples: {
@@ -983,7 +983,7 @@ module.exports = {
 				callback: async (action) => {
 					// Send command to stop all active pads
 					instance.sendCommand('STOP_ACTIVE_PADS', {})
-				}
+				},
 			},
 
 			selectBank: {
@@ -1002,13 +1002,13 @@ module.exports = {
 							{ id: 4, label: 'Bank 5' },
 							{ id: 5, label: 'Bank 6' },
 							{ id: 6, label: 'Bank 7' },
-							{ id: 7, label: 'Bank 8' }
-						]
-					}
+							{ id: 7, label: 'Bank 8' },
+						],
+					},
 				],
 				callback: async (action) => {
 					instance.setParameter('bank', action.options.bank)
-				}
+				},
 			},
 
 			// === RECORDING CONTROLS ===
@@ -1023,23 +1023,23 @@ module.exports = {
 						choices: [
 							{ id: 'usb', label: 'USB Drive' },
 							{ id: 'sd', label: 'SD Card' },
-							{ id: 'computer', label: 'To Computer' }
-						]
-					}
+							{ id: 'computer', label: 'To Computer' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const dest = action.options.destination
-					
+
 					// Set recording destination
 					if (dest === 'usb') {
 						instance.setParameter('settings.rec.toUSB', 1)
 					} else if (dest === 'computer') {
 						instance.setParameter('settings.rec.toComputer', 1)
 					}
-					
+
 					// Start recording (recState: 1 = ACTIVE)
 					instance.setParameter('recState', 1)
-				}
+				},
 			},
 
 			stopRecording: {
@@ -1048,7 +1048,7 @@ module.exports = {
 				callback: async (action) => {
 					// Stop recording (recState: 3 = SAVING, then 4 = SAVED)
 					instance.setParameter('recState', 3)
-				}
+				},
 			},
 
 			pauseRecording: {
@@ -1057,7 +1057,7 @@ module.exports = {
 				callback: async (action) => {
 					// Pause recording (recState: 2 = PAUSED)
 					instance.setParameter('recState', 2)
-				}
+				},
 			},
 
 			// === NOISE GATE CONTROLS ===
@@ -1072,8 +1072,8 @@ module.exports = {
 						choices: [
 							{ id: 'i', label: 'Input' },
 							{ id: 'p', label: 'Player' },
-							{ id: 'm', label: 'Master' }
-						]
+							{ id: 'm', label: 'Master' },
+						],
 					},
 					{
 						type: 'number',
@@ -1081,7 +1081,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -1091,24 +1091,24 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Active (Gate On)' },
 							{ id: 1, label: 'Bypass (Gate Off)' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					let bypassState = action.options.bypass
-					
+
 					const key = `${channelType}.${channel}.gate.bypass`
-					
+
 					if (bypassState === 2) {
 						const currentState = instance.state.channels[key] || 0
 						bypassState = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, bypassState)
-				}
+				},
 			},
 
 			setGate: {
@@ -1122,8 +1122,8 @@ module.exports = {
 						choices: [
 							{ id: 'i', label: 'Input' },
 							{ id: 'p', label: 'Player' },
-							{ id: 'm', label: 'Master' }
-						]
+							{ id: 'm', label: 'Master' },
+						],
 					},
 					{
 						type: 'number',
@@ -1131,7 +1131,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'number',
@@ -1139,7 +1139,7 @@ module.exports = {
 						id: 'thresh',
 						default: -40,
 						min: -60,
-						max: 0
+						max: 0,
 					},
 					{
 						type: 'number',
@@ -1147,7 +1147,7 @@ module.exports = {
 						id: 'range',
 						default: -80,
 						min: -80,
-						max: 0
+						max: 0,
 					},
 					{
 						type: 'number',
@@ -1156,7 +1156,7 @@ module.exports = {
 						default: 1,
 						min: 0.5,
 						max: 500,
-						step: 0.5
+						step: 0.5,
 					},
 					{
 						type: 'number',
@@ -1165,7 +1165,7 @@ module.exports = {
 						default: 10,
 						min: 0,
 						max: 500,
-						step: 1
+						step: 1,
 					},
 					{
 						type: 'number',
@@ -1174,27 +1174,27 @@ module.exports = {
 						default: 100,
 						min: 10,
 						max: 2000,
-						step: 10
-					}
+						step: 10,
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					const prefix = `${channelType}.${channel}.gate`
-					
+
 					// Normalize to 0-1
 					const threshNorm = (action.options.thresh + 60) / 60
 					const rangeNorm = (action.options.range + 80) / 80
 					const attackNorm = Math.log(action.options.attack / 0.5) / Math.log(500 / 0.5)
-					const holdNorm = Math.sqrt(action.options.hold / 500)  // Squared curve
+					const holdNorm = Math.sqrt(action.options.hold / 500) // Squared curve
 					const releaseNorm = Math.log(action.options.release / 10) / Math.log(2000 / 10)
-					
+
 					instance.setParameter(`${prefix}.thresh`, threshNorm)
 					instance.setParameter(`${prefix}.range`, rangeNorm)
 					instance.setParameter(`${prefix}.attack`, attackNorm)
 					instance.setParameter(`${prefix}.hold`, holdNorm)
 					instance.setParameter(`${prefix}.release`, releaseNorm)
-				}
+				},
 			},
 
 			// === DE-ESSER CONTROLS ===
@@ -1208,8 +1208,8 @@ module.exports = {
 						default: 'i',
 						choices: [
 							{ id: 'i', label: 'Input' },
-							{ id: 'p', label: 'Player' }
-						]
+							{ id: 'p', label: 'Player' },
+						],
 					},
 					{
 						type: 'number',
@@ -1217,7 +1217,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -1227,24 +1227,24 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Active (De-Esser On)' },
 							{ id: 1, label: 'Bypass (De-Esser Off)' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					let bypassState = action.options.bypass
-					
+
 					const key = `${channelType}.${channel}.ds.bypass`
-					
+
 					if (bypassState === 2) {
 						const currentState = instance.state.channels[key] || 0
 						bypassState = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, bypassState)
-				}
+				},
 			},
 
 			setDeEsser: {
@@ -1257,8 +1257,8 @@ module.exports = {
 						default: 'i',
 						choices: [
 							{ id: 'i', label: 'Input' },
-							{ id: 'p', label: 'Player' }
-						]
+							{ id: 'p', label: 'Player' },
+						],
 					},
 					{
 						type: 'number',
@@ -1266,7 +1266,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'number',
@@ -1274,7 +1274,7 @@ module.exports = {
 						id: 'thresh',
 						default: -20,
 						min: -96,
-						max: 0
+						max: 0,
 					},
 					{
 						type: 'number',
@@ -1283,7 +1283,7 @@ module.exports = {
 						default: 6000,
 						min: 2000,
 						max: 12000,
-						step: 100
+						step: 100,
 					},
 					{
 						type: 'number',
@@ -1292,7 +1292,7 @@ module.exports = {
 						default: 1.0,
 						min: 0.1,
 						max: 15,
-						step: 0.1
+						step: 0.1,
 					},
 					{
 						type: 'number',
@@ -1301,25 +1301,25 @@ module.exports = {
 						default: -6,
 						min: -15,
 						max: 0,
-						step: 0.5
-					}
+						step: 0.5,
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					const prefix = `${channelType}.${channel}.ds`
-					
+
 					// Normalize to 0-1
 					const threshNorm = (action.options.thresh + 96) / 96
 					const freqNorm = Math.log(action.options.freq / 20) / Math.log(20000 / 20)
 					const qNorm = Math.log(action.options.q / 0.1) / Math.log(15 / 0.1)
 					const rangeNorm = (action.options.range + 15) / 15
-					
+
 					instance.setParameter(`${prefix}.thresh`, threshNorm)
 					instance.setParameter(`${prefix}.freq`, freqNorm)
 					instance.setParameter(`${prefix}.q`, qNorm)
 					instance.setParameter(`${prefix}.range`, rangeNorm)
-				}
+				},
 			},
 
 			// === PLAYER CONTROLS ===
@@ -1334,16 +1334,16 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Player 1' },
 							{ id: 1, label: 'Player 2' },
-							{ id: 2, label: 'Player 3' }
-						]
-					}
+							{ id: 2, label: 'Player 3' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const player = action.options.player
 					const key = `player.${player}.state`
 					// State 3 = PLAY
 					instance.setParameter(key, 3)
-				}
+				},
 			},
 
 			playerPause: {
@@ -1357,16 +1357,16 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Player 1' },
 							{ id: 1, label: 'Player 2' },
-							{ id: 2, label: 'Player 3' }
-						]
-					}
+							{ id: 2, label: 'Player 3' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const player = action.options.player
 					const key = `player.${player}.state`
 					// State 5 = PAUSE
 					instance.setParameter(key, 5)
-				}
+				},
 			},
 
 			playerStop: {
@@ -1380,16 +1380,16 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Player 1' },
 							{ id: 1, label: 'Player 2' },
-							{ id: 2, label: 'Player 3' }
-						]
-					}
+							{ id: 2, label: 'Player 3' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const player = action.options.player
 					const key = `player.${player}.state`
 					// State 2 = STOP
 					instance.setParameter(key, 2)
-				}
+				},
 			},
 
 			playerSeek: {
@@ -1403,8 +1403,8 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Player 1' },
 							{ id: 1, label: 'Player 2' },
-							{ id: 2, label: 'Player 3' }
-						]
+							{ id: 2, label: 'Player 3' },
+						],
 					},
 					{
 						type: 'number',
@@ -1412,14 +1412,14 @@ module.exports = {
 						id: 'position',
 						default: 0,
 						min: 0,
-						max: 7200
-					}
+						max: 7200,
+					},
 				],
 				callback: async (action) => {
 					const player = action.options.player
 					const key = `player.${player}.seekPos`
 					instance.setParameter(key, action.options.position)
-				}
+				},
 			},
 
 			// === AUX BUS CONTROLS ===
@@ -1435,8 +1435,8 @@ module.exports = {
 							{ id: 0, label: 'Aux 1' },
 							{ id: 1, label: 'Aux 2' },
 							{ id: 2, label: 'Aux 3' },
-							{ id: 3, label: 'Aux 4' }
-						]
+							{ id: 3, label: 'Aux 4' },
+						],
 					},
 					{
 						type: 'number',
@@ -1445,14 +1445,14 @@ module.exports = {
 						default: 0.75,
 						min: 0,
 						max: 1,
-						step: 0.01
-					}
+						step: 0.01,
+					},
 				],
 				callback: async (action) => {
 					const aux = action.options.auxBus
 					const key = `a.${aux}.mix`
 					instance.setParameter(key, action.options.level)
-				}
+				},
 			},
 
 			muteAuxBus: {
@@ -1467,8 +1467,8 @@ module.exports = {
 							{ id: 0, label: 'Aux 1' },
 							{ id: 1, label: 'Aux 2' },
 							{ id: 2, label: 'Aux 3' },
-							{ id: 3, label: 'Aux 4' }
-						]
+							{ id: 3, label: 'Aux 4' },
+						],
 					},
 					{
 						type: 'dropdown',
@@ -1478,23 +1478,23 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Unmute' },
 							{ id: 1, label: 'Mute' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const aux = action.options.auxBus
 					let muteState = action.options.mute
-					
+
 					const key = `a.${aux}.mute`
-					
+
 					if (muteState === 2) {
 						const currentState = instance.state.channels[key] || 0
 						muteState = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, muteState)
-				}
+				},
 			},
 
 			setAuxBusPan: {
@@ -1509,8 +1509,8 @@ module.exports = {
 							{ id: 0, label: 'Aux 1' },
 							{ id: 1, label: 'Aux 2' },
 							{ id: 2, label: 'Aux 3' },
-							{ id: 3, label: 'Aux 4' }
-						]
+							{ id: 3, label: 'Aux 4' },
+						],
 					},
 					{
 						type: 'number',
@@ -1519,14 +1519,14 @@ module.exports = {
 						default: 0.5,
 						min: 0,
 						max: 1,
-						step: 0.01
-					}
+						step: 0.01,
+					},
 				],
 				callback: async (action) => {
 					const aux = action.options.auxBus
 					const key = `a.${aux}.pan`
 					instance.setParameter(key, action.options.pan)
-				}
+				},
 			},
 
 			// === SNAPSHOT/SCENE CONTROLS ===
@@ -1543,15 +1543,15 @@ module.exports = {
 							{ id: 1, label: 'Snapshot 2' },
 							{ id: 2, label: 'Snapshot 3' },
 							{ id: 3, label: 'Snapshot 4' },
-							{ id: 4, label: 'Snapshot 5' }
-						]
-					}
+							{ id: 4, label: 'Snapshot 5' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const snapshot = action.options.snapshot
 					// Send command to recall snapshot
 					instance.sendCommand('RECALL_SNAPSHOT', { snapshot: snapshot })
-				}
+				},
 			},
 
 			saveSnapshot: {
@@ -1567,15 +1567,15 @@ module.exports = {
 							{ id: 1, label: 'Snapshot 2' },
 							{ id: 2, label: 'Snapshot 3' },
 							{ id: 3, label: 'Snapshot 4' },
-							{ id: 4, label: 'Snapshot 5' }
-						]
-					}
+							{ id: 4, label: 'Snapshot 5' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const snapshot = action.options.snapshot
 					// Send command to save snapshot
 					instance.sendCommand('SAVE_SNAPSHOT', { snapshot: snapshot })
-				}
+				},
 			},
 
 			// === AUTO-GAIN CONTROLS ===
@@ -1587,9 +1587,7 @@ module.exports = {
 						label: 'Channel Type',
 						id: 'channelType',
 						default: 'i',
-						choices: [
-							{ id: 'i', label: 'Input' }
-						]
+						choices: [{ id: 'i', label: 'Input' }],
 					},
 					{
 						type: 'number',
@@ -1597,7 +1595,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -1607,24 +1605,24 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Off' },
 							{ id: 1, label: 'On' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					let state = action.options.state
-					
+
 					const key = `${channelType}.${channel}.autogain`
-					
+
 					if (state === 2) {
 						const currentState = instance.state.channels[key] || 0
 						state = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, state)
-				}
+				},
 			},
 
 			// === AUTO-MIX CONTROLS ===
@@ -1639,21 +1637,21 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Off' },
 							{ id: 1, label: 'On' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					let state = action.options.state
 					const key = 'settings.automix'
-					
+
 					if (state === 2) {
 						const currentState = instance.state.channels[key] || 0
 						state = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, state)
-				}
+				},
 			},
 
 			setAutoMixWeight: {
@@ -1664,9 +1662,7 @@ module.exports = {
 						label: 'Channel Type',
 						id: 'channelType',
 						default: 'i',
-						choices: [
-							{ id: 'i', label: 'Input' }
-						]
+						choices: [{ id: 'i', label: 'Input' }],
 					},
 					{
 						type: 'number',
@@ -1674,7 +1670,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'number',
@@ -1683,15 +1679,15 @@ module.exports = {
 						default: 0.5,
 						min: 0,
 						max: 1,
-						step: 0.01
-					}
+						step: 0.01,
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					const key = `${channelType}.${channel}.automix.weight`
 					instance.setParameter(key, action.options.weight)
-				}
+				},
 			},
 
 			// === NDI STREAMING CONTROLS ===
@@ -1706,21 +1702,21 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Disable' },
 							{ id: 1, label: 'Enable' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					let state = action.options.state
 					const key = 'settings.ndi.enable'
-					
+
 					if (state === 2) {
 						const currentState = instance.state.channels[key] || 0
 						state = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, state)
-				}
+				},
 			},
 
 			setNDIDeviceName: {
@@ -1730,13 +1726,13 @@ module.exports = {
 						type: 'textinput',
 						label: 'Device Name',
 						id: 'name',
-						default: 'DLZ Creator'
-					}
+						default: 'DLZ Creator',
+					},
 				],
 				callback: async (action) => {
 					const key = 'settings.ndi.name'
 					instance.setParameter(key, action.options.name)
-				}
+				},
 			},
 
 			scanNDIDevices: {
@@ -1744,7 +1740,7 @@ module.exports = {
 				options: [],
 				callback: async (action) => {
 					instance.sendCommand('SCAN_NDI', {})
-				}
+				},
 			},
 
 			// === BLUETOOTH CONTROLS ===
@@ -1759,21 +1755,21 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Disable' },
 							{ id: 1, label: 'Enable' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					let state = action.options.state
 					const key = 'settings.bluetooth.enable'
-					
+
 					if (state === 2) {
 						const currentState = instance.state.channels[key] || 0
 						state = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, state)
-				}
+				},
 			},
 
 			bluetoothPair: {
@@ -1781,7 +1777,7 @@ module.exports = {
 				options: [],
 				callback: async (action) => {
 					instance.sendCommand('BT_PAIR', {})
-				}
+				},
 			},
 
 			bluetoothDisconnect: {
@@ -1789,7 +1785,7 @@ module.exports = {
 				options: [],
 				callback: async (action) => {
 					instance.sendCommand('BT_DISCONNECT', {})
-				}
+				},
 			},
 
 			// === SYSTEM SETTINGS ===
@@ -1802,13 +1798,13 @@ module.exports = {
 						id: 'brightness',
 						default: 75,
 						min: 0,
-						max: 100
-					}
+						max: 100,
+					},
 				],
 				callback: async (action) => {
 					const key = 'settings.brightness.screen'
 					instance.setParameter(key, action.options.brightness / 100)
-				}
+				},
 			},
 
 			setButtonBrightness: {
@@ -1820,13 +1816,13 @@ module.exports = {
 						id: 'brightness',
 						default: 75,
 						min: 0,
-						max: 100
-					}
+						max: 100,
+					},
 				],
 				callback: async (action) => {
 					const key = 'settings.brightness.button'
 					instance.setParameter(key, action.options.brightness / 100)
-				}
+				},
 			},
 
 			setLayoutMode: {
@@ -1839,14 +1835,14 @@ module.exports = {
 						default: 0,
 						choices: [
 							{ id: 0, label: 'EZ Mode' },
-							{ id: 1, label: 'Advanced Mode' }
-						]
-					}
+							{ id: 1, label: 'Advanced Mode' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const key = 'settings.layout'
 					instance.setParameter(key, action.options.mode)
-				}
+				},
 			},
 
 			restartGUI: {
@@ -1854,7 +1850,7 @@ module.exports = {
 				options: [],
 				callback: async (action) => {
 					instance.sendCommand('RESTART_GUI', {})
-				}
+				},
 			},
 
 			factoryReset: {
@@ -1867,16 +1863,16 @@ module.exports = {
 						default: 0,
 						choices: [
 							{ id: 0, label: 'No - Cancel' },
-							{ id: 1, label: 'Yes - Reset Everything!' }
-						]
-					}
+							{ id: 1, label: 'Yes - Reset Everything!' },
+						],
+					},
 				],
 				callback: async (action) => {
 					if (action.options.confirm === 1) {
 						instance.sendCommand('FACTORY_RESET', {})
 						instance.log('warn', 'Factory reset initiated!')
 					}
-				}
+				},
 			},
 
 			// === ADVANCED SAMPLE CONTROLS ===
@@ -1896,8 +1892,8 @@ module.exports = {
 							{ id: 4, label: 'Bank 5' },
 							{ id: 5, label: 'Bank 6' },
 							{ id: 6, label: 'Bank 7' },
-							{ id: 7, label: 'Bank 8' }
-						]
+							{ id: 7, label: 'Bank 8' },
+						],
 					},
 					{
 						type: 'dropdown',
@@ -1910,8 +1906,8 @@ module.exports = {
 							{ id: 2, label: 'Pad 3' },
 							{ id: 3, label: 'Pad 4' },
 							{ id: 4, label: 'Pad 5' },
-							{ id: 5, label: 'Pad 6' }
-						]
+							{ id: 5, label: 'Pad 6' },
+						],
 					},
 					{
 						type: 'dropdown',
@@ -1922,16 +1918,16 @@ module.exports = {
 							{ id: 0, label: 'One-Shot' },
 							{ id: 1, label: 'Loop' },
 							{ id: 2, label: 'Hold' },
-							{ id: 3, label: 'Bleep' }
-						]
-					}
+							{ id: 3, label: 'Bleep' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const bank = action.options.bank
 					const pad = action.options.pad
 					const key = `B.${bank}.${pad}.mode`
 					instance.setParameter(key, action.options.mode)
-				}
+				},
 			},
 
 			setSampleVolume: {
@@ -1950,8 +1946,8 @@ module.exports = {
 							{ id: 4, label: 'Bank 5' },
 							{ id: 5, label: 'Bank 6' },
 							{ id: 6, label: 'Bank 7' },
-							{ id: 7, label: 'Bank 8' }
-						]
+							{ id: 7, label: 'Bank 8' },
+						],
 					},
 					{
 						type: 'dropdown',
@@ -1964,8 +1960,8 @@ module.exports = {
 							{ id: 2, label: 'Pad 3' },
 							{ id: 3, label: 'Pad 4' },
 							{ id: 4, label: 'Pad 5' },
-							{ id: 5, label: 'Pad 6' }
-						]
+							{ id: 5, label: 'Pad 6' },
+						],
 					},
 					{
 						type: 'number',
@@ -1974,8 +1970,8 @@ module.exports = {
 						default: 0,
 						min: -40,
 						max: 0,
-						step: 0.5
-					}
+						step: 0.5,
+					},
 				],
 				callback: async (action) => {
 					const bank = action.options.bank
@@ -1984,7 +1980,7 @@ module.exports = {
 					// Normalize -40 to 0 dB to 0.0-1.0
 					const normalized = (action.options.volume + 40) / 40
 					instance.setParameter(key, normalized)
-				}
+				},
 			},
 
 			setSampleFade: {
@@ -2003,8 +1999,8 @@ module.exports = {
 							{ id: 4, label: 'Bank 5' },
 							{ id: 5, label: 'Bank 6' },
 							{ id: 6, label: 'Bank 7' },
-							{ id: 7, label: 'Bank 8' }
-						]
+							{ id: 7, label: 'Bank 8' },
+						],
 					},
 					{
 						type: 'dropdown',
@@ -2017,8 +2013,8 @@ module.exports = {
 							{ id: 2, label: 'Pad 3' },
 							{ id: 3, label: 'Pad 4' },
 							{ id: 4, label: 'Pad 5' },
-							{ id: 5, label: 'Pad 6' }
-						]
+							{ id: 5, label: 'Pad 6' },
+						],
 					},
 					{
 						type: 'number',
@@ -2026,7 +2022,7 @@ module.exports = {
 						id: 'fadeIn',
 						default: 10,
 						min: 1,
-						max: 1000
+						max: 1000,
 					},
 					{
 						type: 'number',
@@ -2034,21 +2030,21 @@ module.exports = {
 						id: 'fadeOut',
 						default: 10,
 						min: 1,
-						max: 5000
-					}
+						max: 5000,
+					},
 				],
 				callback: async (action) => {
 					const bank = action.options.bank
 					const pad = action.options.pad
 					const prefix = `B.${bank}.${pad}`
-					
+
 					// Normalize to 0-1
 					const fadeInNorm = (action.options.fadeIn - 1) / 999
 					const fadeOutNorm = (action.options.fadeOut - 1) / 4999
-					
+
 					instance.setParameter(`${prefix}.fadeIn`, fadeInNorm)
 					instance.setParameter(`${prefix}.fadeOut`, fadeOutNorm)
-				}
+				},
 			},
 
 			setSampleStartEnd: {
@@ -2067,8 +2063,8 @@ module.exports = {
 							{ id: 4, label: 'Bank 5' },
 							{ id: 5, label: 'Bank 6' },
 							{ id: 6, label: 'Bank 7' },
-							{ id: 7, label: 'Bank 8' }
-						]
+							{ id: 7, label: 'Bank 8' },
+						],
 					},
 					{
 						type: 'dropdown',
@@ -2081,8 +2077,8 @@ module.exports = {
 							{ id: 2, label: 'Pad 3' },
 							{ id: 3, label: 'Pad 4' },
 							{ id: 4, label: 'Pad 5' },
-							{ id: 5, label: 'Pad 6' }
-						]
+							{ id: 5, label: 'Pad 6' },
+						],
 					},
 					{
 						type: 'number',
@@ -2090,7 +2086,7 @@ module.exports = {
 						id: 'start',
 						default: 0,
 						min: 0,
-						max: 3000
+						max: 3000,
 					},
 					{
 						type: 'number',
@@ -2098,21 +2094,21 @@ module.exports = {
 						id: 'end',
 						default: 3000,
 						min: 0,
-						max: 3000
-					}
+						max: 3000,
+					},
 				],
 				callback: async (action) => {
 					const bank = action.options.bank
 					const pad = action.options.pad
 					const prefix = `B.${bank}.${pad}`
-					
+
 					// Normalize to 0-1
 					const startNorm = action.options.start / 3000
 					const endNorm = action.options.end / 3000
-					
+
 					instance.setParameter(`${prefix}.start`, startNorm)
 					instance.setParameter(`${prefix}.end`, endNorm)
-				}
+				},
 			},
 
 			muteBank: {
@@ -2131,8 +2127,8 @@ module.exports = {
 							{ id: 4, label: 'Bank 5' },
 							{ id: 5, label: 'Bank 6' },
 							{ id: 6, label: 'Bank 7' },
-							{ id: 7, label: 'Bank 8' }
-						]
+							{ id: 7, label: 'Bank 8' },
+						],
 					},
 					{
 						type: 'dropdown',
@@ -2142,23 +2138,23 @@ module.exports = {
 						choices: [
 							{ id: 0, label: 'Unmute' },
 							{ id: 1, label: 'Mute' },
-							{ id: 2, label: 'Toggle' }
-						]
-					}
+							{ id: 2, label: 'Toggle' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const bank = action.options.bank
 					let muteState = action.options.mute
-					
+
 					const key = `B.${bank}.mute`
-					
+
 					if (muteState === 2) {
 						const currentState = instance.state.channels[key] || 0
 						muteState = currentState ? 0 : 1
 					}
-					
+
 					instance.setParameter(key, muteState)
-				}
+				},
 			},
 
 			// === CHANNEL COLOR/NAMING ===
@@ -2172,8 +2168,8 @@ module.exports = {
 						default: 'i',
 						choices: [
 							{ id: 'i', label: 'Input' },
-							{ id: 'p', label: 'Player' }
-						]
+							{ id: 'p', label: 'Player' },
+						],
 					},
 					{
 						type: 'number',
@@ -2181,7 +2177,7 @@ module.exports = {
 						id: 'channel',
 						default: 1,
 						min: 1,
-						max: 4
+						max: 4,
 					},
 					{
 						type: 'dropdown',
@@ -2199,16 +2195,16 @@ module.exports = {
 							{ id: 7, label: 'Purple' },
 							{ id: 8, label: 'Pink' },
 							{ id: 9, label: 'White' },
-							{ id: 10, label: 'Gray' }
-						]
-					}
+							{ id: 10, label: 'Gray' },
+						],
+					},
 				],
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					const key = `${channelType}.${channel}.color`
 					instance.setParameter(key, action.options.color)
-				}
+				},
 			},
 
 			// === MASTER DELAY ===
@@ -2222,16 +2218,16 @@ module.exports = {
 						default: 0,
 						min: 0,
 						max: 250,
-						step: 1
-					}
+						step: 1,
+					},
 				],
 				callback: async (action) => {
 					const key = 'm.delay'
 					// Normalize to 0-1
 					const normalized = action.options.delay / 250
 					instance.setParameter(key, normalized)
-				}
-			}
+				},
+			},
 		}
-	}
+	},
 }

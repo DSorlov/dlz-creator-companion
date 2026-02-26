@@ -3,7 +3,7 @@ const { combineRgb } = require('@companion-module/base')
 module.exports = {
 	getPresets(instance) {
 		const presets = {}
-		
+
 		// Input channel presets
 		for (let i = 1; i <= 4; i++) {
 			// Mute button
@@ -15,7 +15,7 @@ module.exports = {
 					text: `Mute\\nIN ${i}`,
 					size: '18',
 					color: combineRgb(255, 255, 255),
-					bgcolor: combineRgb(0, 0, 0)
+					bgcolor: combineRgb(0, 0, 0),
 				},
 				steps: [
 					{
@@ -25,28 +25,28 @@ module.exports = {
 								options: {
 									channelType: 'i',
 									channel: i,
-									mute: 2 // Toggle
-								}
-							}
+									mute: 2, // Toggle
+								},
+							},
 						],
-						up: []
-					}
+						up: [],
+					},
 				],
 				feedbacks: [
 					{
 						feedbackId: 'channel_mute',
 						options: {
 							channelType: 'i',
-							channel: i
+							channel: i,
 						},
 						style: {
 							bgcolor: combineRgb(255, 0, 0),
-							color: combineRgb(255, 255, 255)
-						}
-					}
-				]
+							color: combineRgb(255, 255, 255),
+						},
+					},
+				],
 			}
-			
+
 			// Solo button
 			presets[`solo_input_${i}`] = {
 				type: 'button',
@@ -56,7 +56,7 @@ module.exports = {
 					text: `Solo\\nIN ${i}`,
 					size: '18',
 					color: combineRgb(0, 0, 0),
-					bgcolor: combineRgb(128, 128, 128)
+					bgcolor: combineRgb(128, 128, 128),
 				},
 				steps: [
 					{
@@ -66,28 +66,28 @@ module.exports = {
 								options: {
 									channelType: 'i',
 									channel: i,
-									solo: 2 // Toggle
-								}
-							}
+									solo: 2, // Toggle
+								},
+							},
 						],
-						up: []
-					}
+						up: [],
+					},
 				],
 				feedbacks: [
 					{
 						feedbackId: 'channel_solo',
 						options: {
 							channelType: 'i',
-							channel: i
+							channel: i,
 						},
 						style: {
 							bgcolor: combineRgb(255, 255, 0),
-							color: combineRgb(0, 0, 0)
-						}
-					}
-				]
+							color: combineRgb(0, 0, 0),
+						},
+					},
+				],
 			}
-			
+
 			// Phantom power button
 			presets[`phantom_input_${i}`] = {
 				type: 'button',
@@ -97,7 +97,7 @@ module.exports = {
 					text: `48V\\nIN ${i}`,
 					size: '18',
 					color: combineRgb(255, 255, 255),
-					bgcolor: combineRgb(0, 0, 0)
+					bgcolor: combineRgb(0, 0, 0),
 				},
 				steps: [
 					{
@@ -106,27 +106,27 @@ module.exports = {
 								actionId: 'setPhantomPower',
 								options: {
 									channel: i,
-									phantom: 2 // Toggle
-								}
-							}
+									phantom: 2, // Toggle
+								},
+							},
 						],
-						up: []
-					}
+						up: [],
+					},
 				],
 				feedbacks: [
 					{
 						feedbackId: 'phantom_power',
 						options: {
-							channel: i
+							channel: i,
 						},
 						style: {
 							bgcolor: combineRgb(255, 100, 0),
-							color: combineRgb(255, 255, 255)
-						}
-					}
-				]
+							color: combineRgb(255, 255, 255),
+						},
+					},
+				],
 			}
-			
+
 			// Fader level display
 			presets[`fader_input_${i}`] = {
 				type: 'button',
@@ -136,17 +136,17 @@ module.exports = {
 					text: `IN ${i}\\n$(mackie-dlz-creator:input_${i}_fader_db)`,
 					size: '14',
 					color: combineRgb(255, 255, 255),
-					bgcolor: combineRgb(0, 0, 0)
+					bgcolor: combineRgb(0, 0, 0),
 				},
 				steps: [
 					{
 						down: [],
-						up: []
-					}
+						up: [],
+					},
 				],
-				feedbacks: []
+				feedbacks: [],
 			}
-			
+
 			// VU meter
 			presets[`vu_input_${i}`] = {
 				type: 'button',
@@ -156,13 +156,13 @@ module.exports = {
 					text: `VU\\nIN ${i}\\n$(mackie-dlz-creator:input_${i}_meter)`,
 					size: '14',
 					color: combineRgb(255, 255, 255),
-					bgcolor: combineRgb(0, 0, 0)
+					bgcolor: combineRgb(0, 0, 0),
 				},
 				steps: [
 					{
 						down: [],
-						up: []
-					}
+						up: [],
+					},
 				],
 				feedbacks: [
 					{
@@ -171,13 +171,13 @@ module.exports = {
 							channelType: 'i',
 							channel: i,
 							red_threshold: -3,
-							yellow_threshold: -12
-						}
-					}
-				]
+							yellow_threshold: -12,
+						},
+					},
+				],
 			}
 		}
-		
+
 		// Player channel presets
 		for (let i = 1; i <= 3; i++) {
 			// Mute button
@@ -189,7 +189,7 @@ module.exports = {
 					text: `Mute\\nPLR ${i}`,
 					size: '18',
 					color: combineRgb(255, 255, 255),
-					bgcolor: combineRgb(0, 0, 0)
+					bgcolor: combineRgb(0, 0, 0),
 				},
 				steps: [
 					{
@@ -199,28 +199,28 @@ module.exports = {
 								options: {
 									channelType: 'p',
 									channel: i,
-									mute: 2 // Toggle
-								}
-							}
+									mute: 2, // Toggle
+								},
+							},
 						],
-						up: []
-					}
+						up: [],
+					},
 				],
 				feedbacks: [
 					{
 						feedbackId: 'channel_mute',
 						options: {
 							channelType: 'p',
-							channel: i
+							channel: i,
 						},
 						style: {
 							bgcolor: combineRgb(255, 0, 0),
-							color: combineRgb(255, 255, 255)
-						}
-					}
-				]
+							color: combineRgb(255, 255, 255),
+						},
+					},
+				],
 			}
-			
+
 			// Solo button
 			presets[`solo_player_${i}`] = {
 				type: 'button',
@@ -230,7 +230,7 @@ module.exports = {
 					text: `Solo\\nPLR ${i}`,
 					size: '18',
 					color: combineRgb(0, 0, 0),
-					bgcolor: combineRgb(128, 128, 128)
+					bgcolor: combineRgb(128, 128, 128),
 				},
 				steps: [
 					{
@@ -240,29 +240,29 @@ module.exports = {
 								options: {
 									channelType: 'p',
 									channel: i,
-									solo: 2 // Toggle
-								}
-							}
+									solo: 2, // Toggle
+								},
+							},
 						],
-						up: []
-					}
+						up: [],
+					},
 				],
 				feedbacks: [
 					{
 						feedbackId: 'channel_solo',
 						options: {
 							channelType: 'p',
-							channel: i
+							channel: i,
 						},
 						style: {
 							bgcolor: combineRgb(255, 255, 0),
-							color: combineRgb(0, 0, 0)
-						}
-					}
-				]
+							color: combineRgb(0, 0, 0),
+						},
+					},
+				],
 			}
 		}
-		
+
 		// Master presets
 		presets['mute_master'] = {
 			type: 'button',
@@ -272,7 +272,7 @@ module.exports = {
 				text: 'Mute\\nMaster',
 				size: '18',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
@@ -282,28 +282,28 @@ module.exports = {
 							options: {
 								channelType: 'm',
 								channel: 1,
-								mute: 2 // Toggle
-							}
-						}
+								mute: 2, // Toggle
+							},
+						},
 					],
-					up: []
-				}
+					up: [],
+				},
 			],
 			feedbacks: [
 				{
 					feedbackId: 'channel_mute',
 					options: {
 						channelType: 'm',
-						channel: 1
+						channel: 1,
 					},
 					style: {
 						bgcolor: combineRgb(255, 0, 0),
-						color: combineRgb(255, 255, 255)
-					}
-				}
-			]
+						color: combineRgb(255, 255, 255),
+					},
+				},
+			],
 		}
-		
+
 		presets['fader_master'] = {
 			type: 'button',
 			category: 'Master',
@@ -312,17 +312,17 @@ module.exports = {
 				text: 'Master\\n$(mackie-dlz-creator:master_fader_db)',
 				size: '14',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
 					down: [],
-					up: []
-				}
+					up: [],
+				},
 			],
-			feedbacks: []
+			feedbacks: [],
 		}
-		
+
 		// Recording presets
 		presets['start_recording'] = {
 			type: 'button',
@@ -332,7 +332,7 @@ module.exports = {
 				text: 'REC\\nStart',
 				size: '18',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(64, 0, 0)
+				bgcolor: combineRgb(64, 0, 0),
 			},
 			steps: [
 				{
@@ -340,12 +340,12 @@ module.exports = {
 						{
 							actionId: 'startRecording',
 							options: {
-								destination: 'usb'
-							}
-						}
+								destination: 'usb',
+							},
+						},
 					],
-					up: []
-				}
+					up: [],
+				},
 			],
 			feedbacks: [
 				{
@@ -353,12 +353,12 @@ module.exports = {
 					options: {},
 					style: {
 						bgcolor: combineRgb(255, 0, 0),
-						color: combineRgb(255, 255, 255)
-					}
-				}
-			]
+						color: combineRgb(255, 255, 255),
+					},
+				},
+			],
 		}
-		
+
 		presets['stop_recording'] = {
 			type: 'button',
 			category: 'Recording',
@@ -367,22 +367,22 @@ module.exports = {
 				text: 'REC\\nStop',
 				size: '18',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
 					down: [
 						{
 							actionId: 'stopRecording',
-							options: {}
-						}
+							options: {},
+						},
 					],
-					up: []
-				}
+					up: [],
+				},
 			],
-			feedbacks: []
+			feedbacks: [],
 		}
-		
+
 		presets['recording_status'] = {
 			type: 'button',
 			category: 'Recording',
@@ -391,13 +391,13 @@ module.exports = {
 				text: 'REC\\n$(mackie-dlz-creator:recording_state)\\n$(mackie-dlz-creator:recording_time)',
 				size: '14',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
 					down: [],
-					up: []
-				}
+					up: [],
+				},
 			],
 			feedbacks: [
 				{
@@ -405,12 +405,12 @@ module.exports = {
 					options: {},
 					style: {
 						bgcolor: combineRgb(255, 0, 0),
-						color: combineRgb(255, 255, 255)
-					}
-				}
-			]
+						color: combineRgb(255, 255, 255),
+					},
+				},
+			],
 		}
-		
+
 		// Sample bank presets
 		for (let bank = 0; bank < 8; bank++) {
 			presets[`select_bank_${bank + 1}`] = {
@@ -421,7 +421,7 @@ module.exports = {
 					text: `Bank\\n${bank + 1}`,
 					size: '18',
 					color: combineRgb(255, 255, 255),
-					bgcolor: combineRgb(0, 64, 0)
+					bgcolor: combineRgb(0, 64, 0),
 				},
 				steps: [
 					{
@@ -429,17 +429,17 @@ module.exports = {
 							{
 								actionId: 'selectBank',
 								options: {
-									bank: bank
-								}
-							}
+									bank: bank,
+								},
+							},
 						],
-						up: []
-					}
+						up: [],
+					},
 				],
-				feedbacks: []
+				feedbacks: [],
 			}
 		}
-		
+
 		// Sample pad presets (for bank 0 as example)
 		for (let pad = 0; pad < 6; pad++) {
 			presets[`trigger_pad_${pad + 1}`] = {
@@ -450,7 +450,7 @@ module.exports = {
 					text: `PAD\\n${pad + 1}\\n$(mackie-dlz-creator:sample_${pad + 1}_name)`,
 					size: '14',
 					color: combineRgb(255, 255, 255),
-					bgcolor: combineRgb(64, 64, 0)
+					bgcolor: combineRgb(64, 64, 0),
 				},
 				steps: [
 					{
@@ -459,37 +459,37 @@ module.exports = {
 								actionId: 'triggerSample',
 								options: {
 									bank: 0,
-									pad: pad
-								}
-							}
+									pad: pad,
+								},
+							},
 						],
 						up: [
 							{
 								actionId: 'stopSample',
 								options: {
 									bank: 0,
-									pad: pad
-								}
-							}
-						]
-					}
+									pad: pad,
+								},
+							},
+						],
+					},
 				],
 				feedbacks: [
 					{
 						feedbackId: 'sample_playing',
 						options: {
 							bank: 0,
-							pad: pad
+							pad: pad,
 						},
 						style: {
 							bgcolor: combineRgb(0, 255, 0),
-							color: combineRgb(0, 0, 0)
-						}
-					}
-				]
+							color: combineRgb(0, 0, 0),
+						},
+					},
+				],
 			}
 		}
-		
+
 		// EQ/Compressor presets (for input 1 as example)
 		presets['eq_bypass_in1'] = {
 			type: 'button',
@@ -499,7 +499,7 @@ module.exports = {
 				text: 'EQ\\nIN 1',
 				size: '18',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
@@ -509,28 +509,28 @@ module.exports = {
 							options: {
 								channelType: 'i',
 								channel: 1,
-								bypass: 2  // Toggle
-							}
-						}
+								bypass: 2, // Toggle
+							},
+						},
 					],
-					up: []
-				}
+					up: [],
+				},
 			],
 			feedbacks: [
 				{
 					feedbackId: 'eq_bypass',
 					options: {
 						channelType: 'i',
-						channel: 1
+						channel: 1,
 					},
 					style: {
 						bgcolor: combineRgb(0, 128, 0),
-						color: combineRgb(255, 255, 255)
-					}
-				}
-			]
+						color: combineRgb(255, 255, 255),
+					},
+				},
+			],
 		}
-		
+
 		presets['comp_bypass_in1'] = {
 			type: 'button',
 			category: 'Input 1',
@@ -539,7 +539,7 @@ module.exports = {
 				text: 'COMP\\nIN 1',
 				size: '18',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
@@ -549,28 +549,28 @@ module.exports = {
 							options: {
 								channelType: 'i',
 								channel: 1,
-								bypass: 2  // Toggle
-							}
-						}
+								bypass: 2, // Toggle
+							},
+						},
 					],
-					up: []
-				}
+					up: [],
+				},
 			],
 			feedbacks: [
 				{
 					feedbackId: 'compressor_bypass',
 					options: {
 						channelType: 'i',
-						channel: 1
+						channel: 1,
 					},
 					style: {
 						bgcolor: combineRgb(0, 150, 255),
-						color: combineRgb(255, 255, 255)
-					}
-				}
-			]
+						color: combineRgb(255, 255, 255),
+					},
+				},
+			],
 		}
-		
+
 		// FX presets
 		presets['reverb_bypass'] = {
 			type: 'button',
@@ -580,7 +580,7 @@ module.exports = {
 				text: 'REVERB',
 				size: '18',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
@@ -589,27 +589,27 @@ module.exports = {
 							actionId: 'setReverbBypass',
 							options: {
 								unit: 0,
-								bypass: 2  // Toggle
-							}
-						}
+								bypass: 2, // Toggle
+							},
+						},
 					],
-					up: []
-				}
+					up: [],
+				},
 			],
 			feedbacks: [
 				{
 					feedbackId: 'fx_bypass',
 					options: {
-						unit: 0
+						unit: 0,
 					},
 					style: {
 						bgcolor: combineRgb(150, 0, 255),
-						color: combineRgb(255, 255, 255)
-					}
-				}
-			]
+						color: combineRgb(255, 255, 255),
+					},
+				},
+			],
 		}
-		
+
 		// Player controls
 		for (let player = 0; player < 3; player++) {
 			presets[`player_${player + 1}_play`] = {
@@ -620,7 +620,7 @@ module.exports = {
 					text: `▶\\nPLR ${player + 1}`,
 					size: '24',
 					color: combineRgb(255, 255, 255),
-					bgcolor: combineRgb(0, 64, 0)
+					bgcolor: combineRgb(0, 64, 0),
 				},
 				steps: [
 					{
@@ -628,27 +628,27 @@ module.exports = {
 							{
 								actionId: 'playerPlay',
 								options: {
-									player: player
-								}
-							}
+									player: player,
+								},
+							},
 						],
-						up: []
-					}
+						up: [],
+					},
 				],
 				feedbacks: [
 					{
 						feedbackId: 'player_playing',
 						options: {
-							player: player
+							player: player,
 						},
 						style: {
 							bgcolor: combineRgb(0, 200, 0),
-							color: combineRgb(255, 255, 255)
-						}
-					}
-				]
+							color: combineRgb(255, 255, 255),
+						},
+					},
+				],
 			}
-			
+
 			presets[`player_${player + 1}_stop`] = {
 				type: 'button',
 				category: `Player ${player + 1}`,
@@ -657,7 +657,7 @@ module.exports = {
 					text: `■\\nPLR ${player + 1}`,
 					size: '24',
 					color: combineRgb(255, 255, 255),
-					bgcolor: combineRgb(64, 0, 0)
+					bgcolor: combineRgb(64, 0, 0),
 				},
 				steps: [
 					{
@@ -665,16 +665,16 @@ module.exports = {
 							{
 								actionId: 'playerStop',
 								options: {
-									player: player
-								}
-							}
+									player: player,
+								},
+							},
 						],
-						up: []
-					}
+						up: [],
+					},
 				],
-				feedbacks: []
+				feedbacks: [],
 			}
-			
+
 			presets[`player_${player + 1}_status`] = {
 				type: 'button',
 				category: `Player ${player + 1}`,
@@ -683,29 +683,29 @@ module.exports = {
 					text: `PLR ${player + 1}\\n$(mackie-dlz-creator:player_${player + 1}_state)\\n$(mackie-dlz-creator:player_${player + 1}_position)`,
 					size: '14',
 					color: combineRgb(255, 255, 255),
-					bgcolor: combineRgb(0, 0, 0)
+					bgcolor: combineRgb(0, 0, 0),
 				},
 				steps: [
 					{
 						down: [],
-						up: []
-					}
+						up: [],
+					},
 				],
 				feedbacks: [
 					{
 						feedbackId: 'player_playing',
 						options: {
-							player: player
+							player: player,
 						},
 						style: {
 							bgcolor: combineRgb(0, 128, 0),
-							color: combineRgb(255, 255, 255)
-						}
-					}
-				]
+							color: combineRgb(255, 255, 255),
+						},
+					},
+				],
 			}
 		}
-		
+
 		// Aux bus controls
 		for (let aux = 0; aux < 4; aux++) {
 			presets[`aux_${aux + 1}_mute`] = {
@@ -716,7 +716,7 @@ module.exports = {
 					text: `Mute\\nAux ${aux + 1}`,
 					size: '18',
 					color: combineRgb(255, 255, 255),
-					bgcolor: combineRgb(0, 0, 0)
+					bgcolor: combineRgb(0, 0, 0),
 				},
 				steps: [
 					{
@@ -725,27 +725,27 @@ module.exports = {
 								actionId: 'muteAuxBus',
 								options: {
 									auxBus: aux,
-									mute: 2  // Toggle
-								}
-							}
+									mute: 2, // Toggle
+								},
+							},
 						],
-						up: []
-					}
+						up: [],
+					},
 				],
 				feedbacks: [
 					{
 						feedbackId: 'aux_muted',
 						options: {
-							auxBus: aux
+							auxBus: aux,
 						},
 						style: {
 							bgcolor: combineRgb(255, 0, 0),
-							color: combineRgb(255, 255, 255)
-						}
-					}
-				]
+							color: combineRgb(255, 255, 255),
+						},
+					},
+				],
 			}
-			
+
 			presets[`aux_${aux + 1}_fader`] = {
 				type: 'button',
 				category: `Aux ${aux + 1}`,
@@ -754,18 +754,18 @@ module.exports = {
 					text: `Aux ${aux + 1}\\n$(mackie-dlz-creator:aux_${aux + 1}_fader_db)`,
 					size: '14',
 					color: combineRgb(255, 255, 255),
-					bgcolor: combineRgb(0, 0, 0)
+					bgcolor: combineRgb(0, 0, 0),
 				},
 				steps: [
 					{
 						down: [],
-						up: []
-					}
+						up: [],
+					},
 				],
-				feedbacks: []
+				feedbacks: [],
 			}
 		}
-		
+
 		// Gate/De-esser for Input 1
 		presets['gate_bypass_in1'] = {
 			type: 'button',
@@ -775,7 +775,7 @@ module.exports = {
 				text: 'GATE\\nIN 1',
 				size: '18',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
@@ -785,28 +785,28 @@ module.exports = {
 							options: {
 								channelType: 'i',
 								channel: 1,
-								bypass: 2  // Toggle
-							}
-						}
+								bypass: 2, // Toggle
+							},
+						},
 					],
-					up: []
-				}
+					up: [],
+				},
 			],
 			feedbacks: [
 				{
 					feedbackId: 'gate_bypass',
 					options: {
 						channelType: 'i',
-						channel: 1
+						channel: 1,
 					},
 					style: {
 						bgcolor: combineRgb(255, 150, 0),
-						color: combineRgb(255, 255, 255)
-					}
-				}
-			]
+						color: combineRgb(255, 255, 255),
+					},
+				},
+			],
 		}
-		
+
 		presets['deesser_bypass_in1'] = {
 			type: 'button',
 			category: 'Input 1',
@@ -815,7 +815,7 @@ module.exports = {
 				text: 'DS\\nIN 1',
 				size: '18',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
@@ -825,28 +825,28 @@ module.exports = {
 							options: {
 								channelType: 'i',
 								channel: 1,
-								bypass: 2  // Toggle
-							}
-						}
+								bypass: 2, // Toggle
+							},
+						},
 					],
-					up: []
-				}
+					up: [],
+				},
 			],
 			feedbacks: [
 				{
 					feedbackId: 'deesser_bypass',
 					options: {
 						channelType: 'i',
-						channel: 1
+						channel: 1,
 					},
 					style: {
 						bgcolor: combineRgb(255, 200, 0),
-						color: combineRgb(0, 0, 0)
-					}
-				}
-			]
+						color: combineRgb(0, 0, 0),
+					},
+				},
+			],
 		}
-		
+
 		// Snapshot controls
 		for (let snap = 0; snap < 5; snap++) {
 			presets[`recall_snapshot_${snap + 1}`] = {
@@ -857,7 +857,7 @@ module.exports = {
 					text: `SNAP\\n${snap + 1}`,
 					size: '18',
 					color: combineRgb(255, 255, 255),
-					bgcolor: combineRgb(0, 64, 64)
+					bgcolor: combineRgb(0, 64, 64),
 				},
 				steps: [
 					{
@@ -865,17 +865,17 @@ module.exports = {
 							{
 								actionId: 'recallSnapshot',
 								options: {
-									snapshot: snap
-								}
-							}
+									snapshot: snap,
+								},
+							},
 						],
-						up: []
-					}
+						up: [],
+					},
 				],
-				feedbacks: []
+				feedbacks: [],
 			}
 		}
-		
+
 		// Auto-Mix controls
 		presets['automix_toggle'] = {
 			type: 'button',
@@ -885,7 +885,7 @@ module.exports = {
 				text: 'AUTO\\nMIX',
 				size: '18',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
@@ -893,12 +893,12 @@ module.exports = {
 						{
 							actionId: 'setAutoMix',
 							options: {
-								state: 2  // Toggle
-							}
-						}
+								state: 2, // Toggle
+							},
+						},
 					],
-					up: []
-				}
+					up: [],
+				},
 			],
 			feedbacks: [
 				{
@@ -906,12 +906,12 @@ module.exports = {
 					options: {},
 					style: {
 						bgcolor: combineRgb(255, 150, 0),
-						color: combineRgb(0, 0, 0)
-					}
-				}
-			]
+						color: combineRgb(0, 0, 0),
+					},
+				},
+			],
 		}
-		
+
 		// Auto-Gain for Input 1
 		presets['autogain_in1'] = {
 			type: 'button',
@@ -921,7 +921,7 @@ module.exports = {
 				text: 'AUTO\\nGAIN\\nIN 1',
 				size: '14',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
@@ -931,28 +931,28 @@ module.exports = {
 							options: {
 								channelType: 'i',
 								channel: 1,
-								state: 2  // Toggle
-							}
-						}
+								state: 2, // Toggle
+							},
+						},
 					],
-					up: []
-				}
+					up: [],
+				},
 			],
 			feedbacks: [
 				{
 					feedbackId: 'autogain_active',
 					options: {
 						channelType: 'i',
-						channel: 1
+						channel: 1,
 					},
 					style: {
 						bgcolor: combineRgb(0, 255, 100),
-						color: combineRgb(0, 0, 0)
-					}
-				}
-			]
+						color: combineRgb(0, 0, 0),
+					},
+				},
+			],
 		}
-		
+
 		// NDI controls
 		presets['ndi_toggle'] = {
 			type: 'button',
@@ -962,7 +962,7 @@ module.exports = {
 				text: 'NDI\\n$(mackie-dlz-creator:ndi_status)',
 				size: '18',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
@@ -970,12 +970,12 @@ module.exports = {
 						{
 							actionId: 'setNDIEnable',
 							options: {
-								state: 2  // Toggle
-							}
-						}
+								state: 2, // Toggle
+							},
+						},
 					],
-					up: []
-				}
+					up: [],
+				},
 			],
 			feedbacks: [
 				{
@@ -983,12 +983,12 @@ module.exports = {
 					options: {},
 					style: {
 						bgcolor: combineRgb(0, 150, 255),
-						color: combineRgb(255, 255, 255)
-					}
-				}
-			]
+						color: combineRgb(255, 255, 255),
+					},
+				},
+			],
 		}
-		
+
 		// Bluetooth controls
 		presets['bluetooth_toggle'] = {
 			type: 'button',
@@ -998,7 +998,7 @@ module.exports = {
 				text: 'BT\\n$(mackie-dlz-creator:bluetooth_status)',
 				size: '14',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
@@ -1006,12 +1006,12 @@ module.exports = {
 						{
 							actionId: 'setBluetoothEnable',
 							options: {
-								state: 2  // Toggle
-							}
-						}
+								state: 2, // Toggle
+							},
+						},
 					],
-					up: []
-				}
+					up: [],
+				},
 			],
 			feedbacks: [
 				{
@@ -1019,12 +1019,12 @@ module.exports = {
 					options: {},
 					style: {
 						bgcolor: combineRgb(0, 100, 255),
-						color: combineRgb(255, 255, 255)
-					}
-				}
-			]
+						color: combineRgb(255, 255, 255),
+					},
+				},
+			],
 		}
-		
+
 		// System info
 		presets['system_status'] = {
 			type: 'button',
@@ -1034,17 +1034,17 @@ module.exports = {
 				text: 'SYS\\n$(mackie-dlz-creator:layout_mode)\\nBr:$(mackie-dlz-creator:screen_brightness)',
 				size: '12',
 				color: combineRgb(255, 255, 255),
-				bgcolor: combineRgb(0, 0, 0)
+				bgcolor: combineRgb(0, 0, 0),
 			},
 			steps: [
 				{
 					down: [],
-					up: []
-				}
+					up: [],
+				},
 			],
-			feedbacks: []
+			feedbacks: [],
 		}
-		
+
 		return presets
-	}
+	},
 }
