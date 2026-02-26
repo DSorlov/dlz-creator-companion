@@ -13,5 +13,4 @@ package-lock.json
 /.yarn
 .pnp.*
 DEBUG-*
-test/messages.log
 .tmp-package/

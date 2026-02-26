@@ -1,12 +1,12 @@
 # Mackie DLZ Creator Module
 
-Professional control module for the Mackie DLZ Creator digital mixer.
+Control module for the Mackie DLZ Creator digital mixer.
 
 ## Configuration
 
 ### Connection Settings
 
-- **Host**: IP address of your DLZ Creator (default: `192.168.8.30`)
+- **Host**: IP address of your DLZ Creator
 - **Port**: Web interface port (default: `80`)
 
 ### Finding Your DLZ Creator IP
@@ -189,53 +189,9 @@ Visual indicators that change button appearance based on mixer state:
 - **Auto-Mix/Gain Active** - Shows automation status
 - **NDI/Bluetooth Status** - Connection indicators
 
-## Troubleshooting
-
-### Connection Issues
-
-**"Connection Failed"**
-
-- Verify DLZ Creator is powered on
-- Check IP address in Companion settings
-- Ensure both devices on same network
-- Try pinging the DLZ Creator IP
-- Check firewall settings
-
-**"Disconnected" after working**
-
-- DLZ Creator may have restarted
-- Network interruption
-- Module will auto-reconnect
-
-### Control Issues
-
-**Actions not working**
-
-- Check connection status (should be green)
-- Verify in Companion logs (Help → View Logs)
-- Try reconnecting (disable/enable connection)
-
-**Variables not updating**
-
-- VU meters update every 100ms
-- Other variables update on change
-- Check connection is established
-
-## Technical Details
-
-- **Protocol**: Socket.IO over WebSocket
-- **Default Port**: 80 (HTTP)
-- **Message Format**: JSON with Socket.IO framing
-- **State Management**: Real-time bidirectional synchronization
-- **Connection**: Automatic reconnection with exponential backoff
-
 ## Support
 
-For detailed documentation, protocol information, and advanced usage, see:
-
-- README.md - Complete feature documentation
-- USER_GUIDE.md - Detailed configuration and usage guide
-- PROTOCOL.md - Technical protocol specification
+For detailed documentation, protocol information, and advanced usage, see https://github.com/DSorlov/dlz-creator-companion
 
 ## License
 

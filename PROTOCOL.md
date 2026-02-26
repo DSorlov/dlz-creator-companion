@@ -703,14 +703,6 @@ The module implements automatic reconnection with exponential backoff:
 - Out-of-range values are clamped
 - Unknown channels return no error
 
-### Best Practices
-
-1. **Debounce Rapid Changes**: Avoid sending the same parameter too frequently
-2. **Cache State Locally**: Don't query device, listen to updates
-3. **Handle Reconnection**: Expect temporary disconnections
-4. **Validate Ranges**: Clamp values before sending
-5. **Use Normalized Values**: Always use 0.0-1.0 range
-
 ---
 
 ## Testing
@@ -876,4 +868,4 @@ The DLZ Creator does not return explicit error codes. Invalid commands are silen
 **Document Version**: 1.0.0  
 **Last Updated**: 2025-02-23
 
-This protocol documentation is based on analysis of the DLZ Creator web interface and may not be officially supported by Mackie/LOUD Audio.
+This protocol documentation is based on analysis of the DLZ Creator web interface and are not officially supported by Mackie/LOUD Audio.

@@ -1,6 +1,10 @@
 # Mackie DLZ Creator Module for Bitfocus Companion
 
-Professional control module for the Mackie DLZ Creator digital mixer, providing complete control over all mixer functions through Bitfocus Companion.
+Control module for the Mackie DLZ Creator digital mixer, providing complete control over all mixer functions through Bitfocus Companion.
+
+This module is not affiliated with, endorsed by, or supported by Mackie or LOUD Audio, LLC. Mackie and DLZ Creator are trademarks of LOUD Audio, LLC.
+
+The module is untested in many parts and still a work in progress. Any help is apprechiated to make the details work. 
 
 Made with ❤️ for audio professionals.
 
@@ -60,7 +64,7 @@ Made with ❤️ for audio professionals.
 3. **Add Connection:**
    - Click **Add Connection**
    - Search for "Mackie DLZ Creator"
-   - Configure the IP address (default: 192.168.8.30)
+   - Configure the IP address
    - Connection should show as "Connected"
 
 ### Manual Installation
@@ -68,24 +72,24 @@ Made with ❤️ for audio professionals.
 ```bash
 # Copy to Companion modules directory
 # macOS:
-cp dlz-creator-companion-1.0.0.tgz ~/Library/Application\ Support/companion-modules/
+cp dlz-creator-1.0.2.tgz ~/Library/Application\ Support/companion-modules/
 
 # Windows:
-copy dlz-creator-companion-1.0.0.tgz %APPDATA%\companion-modules\
+copy dlz-creator-1.0.2.tgz %APPDATA%\companion-modules\
 
 # Linux:
-cp dlz-creator-companion-1.0.0.tgz ~/.local/share/companion-modules/
+cp dlz-creator-1.0.2.tgz ~/.local/share/companion-modules/
 
 # Extract and restart Companion
 cd [companion-modules directory]
-tar -xzf dlz-creator-companion-1.0.0.tgz
+tar -xzf dlz-creator-1.0.2.tgz
 ```
 
 ## Configuration
 
 ### Connection Settings
 
-- **Host**: IP address of your DLZ Creator (default: `192.168.8.30`)
+- **Host**: IP address of your DLZ Creator
 - **Port**: Web interface port (default: `80`)
 
 ### Finding Your DLZ Creator IP
@@ -286,22 +290,12 @@ git clone [repository-url]
 cd dlz-creator-companion
 
 # Install dependencies
-npm install
+yarn install
 
 # Build package
-npm run package
+yarn package
 
-# Package will be in dist/ folder
-```
-
-### Testing
-
-```bash
-# Test connection
-npm run test
-
-# Run with Companion Developer Tools
-# See Companion documentation for module development
+# Package will be in root folder
 ```
 
 ## Detailed configuration and usage
@@ -321,15 +315,3 @@ See [PROTOCOL.md](PROTOCOL.md) for detailed technical information.
 ## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
-
-This module is not affiliated with, endorsed by, or supported by Mackie or LOUD Audio, LLC. Mackie and DLZ Creator are trademarks of LOUD Audio, LLC.
-
-## Credits
-
-- Developed for Bitfocus Companion
-- Mackie DLZ Creator is a product of LOUD Audio, LLC
-- Protocol analysis based on DLZ Creator web interface
-
-## Version
-
-**v1.0.0** - Complete feature implementation (2025-02-23)
