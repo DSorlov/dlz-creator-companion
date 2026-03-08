@@ -1,3 +1,7 @@
+# This release is retired, please see the new repo with updated version
+
+https://github.com/bitfocus/companion-module-mackie-dlzcreator
+
 # Mackie DLZ Creator Module for Bitfocus Companion
 
 Control module for the Mackie DLZ Creator digital mixer, providing complete control over all mixer functions through Bitfocus Companion.
