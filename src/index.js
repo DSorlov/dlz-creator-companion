@@ -115,9 +115,9 @@ class MackieDLZCreatorInstance extends InstanceBase {
 			this.updateStatus(InstanceStatus.ConnectionFailure)
 		})
 
-		// Handle incoming messages
-		this.socket.on('message', (data) => {
-			this.handleMessage(data)
+		// Handle channel parameter updates
+		this.socket.on('channelState', (data) => {
+			this.handleChannelState(data)
 		})
 
 		// Handle VU meter updates
@@ -125,85 +125,60 @@ class MackieDLZCreatorInstance extends InstanceBase {
 			this.handleVUUpdate(data)
 		})
 
-		// Handle config updates
-		this.socket.on('config', (data) => {
-			this.handleConfigUpdate(data)
+		// Handle player status updates
+		this.socket.on('playerState', (data) => {
+			this.handlePlayerState(data)
 		})
 
-		// Handle routing updates
-		this.socket.on('routing', (data) => {
-			this.handleRoutingUpdate(data)
+		// Handle recording status updates
+		this.socket.on('recordState', (data) => {
+			this.handleRecordState(data)
+		})
+
+		// Handle sample playback status updates
+		this.socket.on('sampleState', (data) => {
+			this.handleSampleState(data)
+		})
+
+		// Handle system status updates
+		this.socket.on('systemState', (data) => {
+			this.handleSystemState(data)
 		})
 	}
 
-	handleMessage(data) {
-		this.log('debug', `Received message: ${JSON.stringify(data)}`)
+	handleChannelState(data) {
+		this.log('debug', `Received channelState: ${JSON.stringify(data)}`)
 
-		// DLZ sends messages as objects with key-value pairs
-		// Example: { 'i.0.mute': 1, 'i.1.mix': 0.75 }
-		if (typeof data === 'object' && !Array.isArray(data)) {
-			// Update state for each property
-			for (const [key, value] of Object.entries(data)) {
-				this.state.channels[key] = value
+		// channelState format: { id: 'i.0.mix', value: 0.75 }
+		if (data && data.id !== undefined && data.value !== undefined) {
+			const key = data.id
+			const value = data.value
 
-				// Update specific feedback types
-				if (key.endsWith('.mute')) {
-					this.checkFeedbacks('channel_mute')
-				} else if (key.endsWith('.solo')) {
-					this.checkFeedbacks('channel_solo')
-				} else if (key.endsWith('.mix')) {
-					this.checkFeedbacks('fader_level')
-				}
+			this.state.channels[key] = value
+
+			if (key.endsWith('.mute')) {
+				this.checkFeedbacks('channel_mute')
+			} else if (key.endsWith('.solo')) {
+				this.checkFeedbacks('channel_solo')
+			} else if (key.endsWith('.mix')) {
+				this.checkFeedbacks('fader_level')
 			}
+
 			this.updateVariables()
-		}
-
-		// Also handle array format messages: ['messageType', data]
-		if (Array.isArray(data) && data.length >= 2) {
-			const [messageType, ...payload] = data
-
-			switch (messageType) {
-				case 'VU':
-					this.handleVUUpdate(payload)
-					break
-				case 'config':
-					this.handleConfigUpdate(payload)
-					break
-				case 'routing':
-					this.handleRoutingUpdate(payload)
-					break
-			}
 		}
 	}
 
 	handleVUUpdate(data) {
-		// VU data format varies - can be array or direct object
-		// Example: ['VU', { ch: 'i.0', level: -12.5, peak: -6.2 }]
-		// Or direct: { 'VU': { ch: 'i.0', level: -12.5 } }
-
-		let vuData = data
-
-		// If it's an array, extract the payload
-		if (Array.isArray(data) && data.length > 0) {
-			vuData = data[0]
-		}
-
-		// Handle the VU object
-		if (vuData && typeof vuData === 'object') {
-			// Could be single channel or multiple channels
-			if (vuData.ch !== undefined) {
-				// Single channel update
-				const ch = vuData.ch
-				this.state.meters[ch] = {
-					level: vuData.level || vuData.l || -60,
-					peak: vuData.peak || vuData.p || -60,
-				}
-			} else {
-				// Could be multiple channels in one update
-				for (const [key, value] of Object.entries(vuData)) {
-					if (key.match(/^(i|p|m|a|f)\./)) {
-						this.state.meters[key] = value
+		// VU data format: { 'i.0.vu': value, 'i.1.vu': value, ... }
+		if (data && typeof data === 'object' && !Array.isArray(data)) {
+			for (const [key, value] of Object.entries(data)) {
+				const match = key.match(/^((i|p|m|a|f)\.\d+)\.vu$/)
+				if (match) {
+					const ch = match[1]
+					if (!this.state.meters[ch]) {
+						this.state.meters[ch] = { level: -60, peak: -60 }
 					}
+					this.state.meters[ch].level = value
 				}
 			}
 
@@ -212,43 +187,119 @@ class MackieDLZCreatorInstance extends InstanceBase {
 		}
 	}
 
-	handleConfigUpdate(data) {
-		this.state.config = Object.assign(this.state.config, data)
-		this.checkFeedbacks()
-		this.updateVariables()
+	handlePlayerState(data) {
+		this.log('debug', `Received playerState: ${JSON.stringify(data)}`)
+
+		// playerState format: { player: 0, status: 'playing', position: 30.5, duration: 120.0 }
+		if (data && data.player !== undefined) {
+			const playerKey = `player.${data.player}`
+			if (data.status !== undefined) {
+				const statusMap = { stopped: 2, playing: 3, end: 4, paused: 5 }
+				this.state.channels[`${playerKey}.state`] = statusMap[data.status] !== undefined ? statusMap[data.status] : 0
+			}
+			if (data.position !== undefined) {
+				this.state.channels[`${playerKey}.pos`] = data.position
+			}
+			if (data.duration !== undefined) {
+				this.state.channels[`${playerKey}.duration`] = data.duration
+			}
+			this.updateVariables()
+		}
 	}
 
-	handleRoutingUpdate(data) {
-		this.state.routing = Object.assign(this.state.routing, data)
-		this.checkFeedbacks()
+	handleRecordState(data) {
+		this.log('debug', `Received recordState: ${JSON.stringify(data)}`)
+
+		// recordState format: { status: 'recording', time: 30.5, destination: 'usb' }
+		if (data) {
+			if (data.status !== undefined) {
+				const statusMap = { ready: 0, recording: 1, paused: 2, saving: 3, saved: 4, full: 5 }
+				this.state.channels['recState'] = statusMap[data.status] !== undefined ? statusMap[data.status] : 0
+			}
+			if (data.time !== undefined) {
+				this.state.channels['recTime'] = data.time
+			}
+			this.updateVariables()
+		}
+	}
+
+	handleSampleState(data) {
+		this.log('debug', `Received sampleState: ${JSON.stringify(data)}`)
+
+		// sampleState format: { bank: 0, pad: 0, playing: true }
+		if (data && data.bank !== undefined && data.pad !== undefined) {
+			const key = `B.${data.bank}.${data.pad}.state`
+			this.state.channels[key] = data.playing ? 3 : 2
+			this.checkFeedbacks('sample_state')
+			this.updateVariables()
+		}
+	}
+
+	handleSystemState(data) {
+		this.log('debug', `Received systemState: ${JSON.stringify(data)}`)
+
+		// systemState format: { 'bluetooth.status': 3 } or { 'ndi.enable': 1 }
+		if (data && typeof data === 'object') {
+			for (const [key, value] of Object.entries(data)) {
+				this.state.channels[`settings.${key}`] = value
+			}
+			this.checkFeedbacks()
+			this.updateVariables()
+		}
 	}
 
 	setParameter(key, value) {
 		if (this.socket && this.socket.connected) {
-			// Send parameter as key-value object (DLZ protocol)
-			const message = {
-				[key]: value,
-			}
-			this.socket.emit('message', message)
+			// Send parameter using channelCtl event (DLZ protocol)
+			this.socket.emit('channelCtl', { id: key, value: value })
 			this.log('debug', `Set parameter: ${key} = ${value}`)
 		} else {
 			this.log('warn', 'Cannot set parameter: not connected')
 		}
 	}
 
-	sendCommand(command, args) {
+	sendPlayerCtl(player, command, args) {
 		if (this.socket && this.socket.connected) {
-			// Send command with args (DLZ protocol for commands)
-			const message = {
-				cmd: command,
-				id: 0,
-				args: args || {},
-				data: {},
-			}
-			this.socket.emit('message', message)
-			this.log('debug', `Sent command: ${command}`)
+			this.socket.emit('playerCtl', Object.assign({ player: player, command: command }, args || {}))
+			this.log('debug', `Sent playerCtl: player=${player} command=${command}`)
 		} else {
-			this.log('warn', 'Cannot send command: not connected')
+			this.log('warn', 'Cannot send playerCtl: not connected')
+		}
+	}
+
+	sendSampleCtl(args) {
+		if (this.socket && this.socket.connected) {
+			this.socket.emit('sampleCtl', args)
+			this.log('debug', `Sent sampleCtl: ${JSON.stringify(args)}`)
+		} else {
+			this.log('warn', 'Cannot send sampleCtl: not connected')
+		}
+	}
+
+	sendRecordCtl(command, args) {
+		if (this.socket && this.socket.connected) {
+			this.socket.emit('recordCtl', Object.assign({ command: command }, args || {}))
+			this.log('debug', `Sent recordCtl: command=${command}`)
+		} else {
+			this.log('warn', 'Cannot send recordCtl: not connected')
+		}
+	}
+
+	sendSnapshotCtl(command, snapshot) {
+		if (this.socket && this.socket.connected) {
+			this.socket.emit('snapshotCtl', { command: command, snapshot: snapshot })
+			this.log('debug', `Sent snapshotCtl: command=${command} snapshot=${snapshot}`)
+		} else {
+			this.log('warn', 'Cannot send snapshotCtl: not connected')
+		}
+	}
+
+	sendSystemCtl(command, args) {
+		if (this.socket && this.socket.connected) {
+			this.socket.emit('systemCtl', Object.assign({ command: command }, args || {}))
+			this.log('debug', `Sent systemCtl: command=${command}`)
+		} else {
+			this.log('warn', 'Cannot send systemCtl: not connected')
 		}
 	}
 

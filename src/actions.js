@@ -38,7 +38,7 @@ module.exports = {
 				callback: async (action) => {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
-					const key = `${channelType}.${channel}.mix`
+					const key = channelType === 'm' ? `${channelType}.mix` : `${channelType}.${channel}.mix`
 					instance.setParameter(key, action.options.level)
 				},
 			},
@@ -82,7 +82,7 @@ module.exports = {
 					const channel = action.options.channel - 1
 					let muteState = action.options.mute
 
-					const key = `${channelType}.${channel}.mute`
+					const key = channelType === 'm' ? `${channelType}.mute` : `${channelType}.${channel}.mute`
 
 					if (muteState === 2) {
 						// Toggle
@@ -299,7 +299,7 @@ module.exports = {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					const aux = action.options.auxBus
-					const key = `${channelType}.${channel}.aux.${aux}.value`
+					const key = `${channelType}.${channel}.aux.${aux}.send`
 					instance.setParameter(key, action.options.level)
 				},
 			},
@@ -885,7 +885,7 @@ module.exports = {
 					const channelType = action.options.channelType
 					const channel = action.options.channel - 1
 					const fx = action.options.fxUnit
-					const key = `${channelType}.${channel}.fx.${fx}.value`
+					const key = `${channelType}.${channel}.fx.${fx}.send`
 					instance.setParameter(key, action.options.level)
 				},
 			},
@@ -926,11 +926,7 @@ module.exports = {
 					},
 				],
 				callback: async (action) => {
-					const bank = action.options.bank
-					const pad = action.options.pad
-					const key = `B.${bank}.${pad}.state`
-					// State 3 = PLAY (from backend: PLAY:3)
-					instance.setParameter(key, 3)
+					instance.sendSampleCtl({ bank: action.options.bank, pad: action.options.pad, command: 'trigger' })
 				},
 			},
 
@@ -969,11 +965,7 @@ module.exports = {
 					},
 				],
 				callback: async (action) => {
-					const bank = action.options.bank
-					const pad = action.options.pad
-					const key = `B.${bank}.${pad}.state`
-					// State 2 = STOP
-					instance.setParameter(key, 2)
+					instance.sendSampleCtl({ bank: action.options.bank, pad: action.options.pad, command: 'stop' })
 				},
 			},
 
@@ -981,8 +973,7 @@ module.exports = {
 				name: 'Stop All Samples',
 				options: [],
 				callback: async (action) => {
-					// Send command to stop all active pads
-					instance.sendCommand('STOP_ACTIVE_PADS', {})
+					instance.sendSampleCtl({ command: 'stopAll' })
 				},
 			},
 
@@ -1007,7 +998,7 @@ module.exports = {
 					},
 				],
 				callback: async (action) => {
-					instance.setParameter('bank', action.options.bank)
+					instance.sendSampleCtl({ command: 'selectBank', bank: action.options.bank })
 				},
 			},
 
@@ -1028,17 +1019,7 @@ module.exports = {
 					},
 				],
 				callback: async (action) => {
-					const dest = action.options.destination
-
-					// Set recording destination
-					if (dest === 'usb') {
-						instance.setParameter('settings.rec.toUSB', 1)
-					} else if (dest === 'computer') {
-						instance.setParameter('settings.rec.toComputer', 1)
-					}
-
-					// Start recording (recState: 1 = ACTIVE)
-					instance.setParameter('recState', 1)
+					instance.sendRecordCtl('start', { destination: action.options.destination })
 				},
 			},
 
@@ -1046,8 +1027,7 @@ module.exports = {
 				name: 'Stop Recording',
 				options: [],
 				callback: async (action) => {
-					// Stop recording (recState: 3 = SAVING, then 4 = SAVED)
-					instance.setParameter('recState', 3)
+					instance.sendRecordCtl('stop')
 				},
 			},
 
@@ -1055,8 +1035,7 @@ module.exports = {
 				name: 'Pause Recording',
 				options: [],
 				callback: async (action) => {
-					// Pause recording (recState: 2 = PAUSED)
-					instance.setParameter('recState', 2)
+					instance.sendRecordCtl('pause')
 				},
 			},
 
@@ -1339,10 +1318,7 @@ module.exports = {
 					},
 				],
 				callback: async (action) => {
-					const player = action.options.player
-					const key = `player.${player}.state`
-					// State 3 = PLAY
-					instance.setParameter(key, 3)
+					instance.sendPlayerCtl(action.options.player, 'play')
 				},
 			},
 
@@ -1362,10 +1338,7 @@ module.exports = {
 					},
 				],
 				callback: async (action) => {
-					const player = action.options.player
-					const key = `player.${player}.state`
-					// State 5 = PAUSE
-					instance.setParameter(key, 5)
+					instance.sendPlayerCtl(action.options.player, 'pause')
 				},
 			},
 
@@ -1385,10 +1358,7 @@ module.exports = {
 					},
 				],
 				callback: async (action) => {
-					const player = action.options.player
-					const key = `player.${player}.state`
-					// State 2 = STOP
-					instance.setParameter(key, 2)
+					instance.sendPlayerCtl(action.options.player, 'stop')
 				},
 			},
 
@@ -1416,9 +1386,7 @@ module.exports = {
 					},
 				],
 				callback: async (action) => {
-					const player = action.options.player
-					const key = `player.${player}.seekPos`
-					instance.setParameter(key, action.options.position)
+					instance.sendPlayerCtl(action.options.player, 'seek', { position: action.options.position })
 				},
 			},
 
@@ -1548,9 +1516,7 @@ module.exports = {
 					},
 				],
 				callback: async (action) => {
-					const snapshot = action.options.snapshot
-					// Send command to recall snapshot
-					instance.sendCommand('RECALL_SNAPSHOT', { snapshot: snapshot })
+					instance.sendSnapshotCtl('recall', action.options.snapshot)
 				},
 			},
 
@@ -1572,9 +1538,7 @@ module.exports = {
 					},
 				],
 				callback: async (action) => {
-					const snapshot = action.options.snapshot
-					// Send command to save snapshot
-					instance.sendCommand('SAVE_SNAPSHOT', { snapshot: snapshot })
+					instance.sendSnapshotCtl('save', action.options.snapshot)
 				},
 			},
 
@@ -1739,7 +1703,7 @@ module.exports = {
 				name: 'Scan for NDI Devices',
 				options: [],
 				callback: async (action) => {
-					instance.sendCommand('SCAN_NDI', {})
+					instance.sendSystemCtl('ndi.scan')
 				},
 			},
 
@@ -1776,7 +1740,7 @@ module.exports = {
 				name: 'Bluetooth Start Pairing',
 				options: [],
 				callback: async (action) => {
-					instance.sendCommand('BT_PAIR', {})
+					instance.sendSystemCtl('bluetooth.pair')
 				},
 			},
 
@@ -1784,7 +1748,7 @@ module.exports = {
 				name: 'Bluetooth Disconnect',
 				options: [],
 				callback: async (action) => {
-					instance.sendCommand('BT_DISCONNECT', {})
+					instance.sendSystemCtl('bluetooth.disconnect')
 				},
 			},
 
@@ -1849,7 +1813,7 @@ module.exports = {
 				name: 'Restart GUI',
 				options: [],
 				callback: async (action) => {
-					instance.sendCommand('RESTART_GUI', {})
+					instance.sendSystemCtl('restart.gui')
 				},
 			},
 
@@ -1869,7 +1833,7 @@ module.exports = {
 				],
 				callback: async (action) => {
 					if (action.options.confirm === 1) {
-						instance.sendCommand('FACTORY_RESET', {})
+						instance.sendSystemCtl('factory.reset', { confirm: true })
 						instance.log('warn', 'Factory reset initiated!')
 					}
 				},

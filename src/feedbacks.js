@@ -35,7 +35,7 @@ module.exports = {
 				callback: (feedback) => {
 					const channelType = feedback.options.channelType
 					const channel = feedback.options.channel - 1
-					const key = `${channelType}.${channel}.mute`
+					const key = channelType === 'm' ? `${channelType}.mute` : `${channelType}.${channel}.mute`
 					return instance.state.channels[key] === 1
 				},
 			},
@@ -128,7 +128,7 @@ module.exports = {
 				callback: (feedback) => {
 					const channelType = feedback.options.channelType
 					const channel = feedback.options.channel - 1
-					const key = `${channelType}.${channel}.mix`
+					const key = channelType === 'm' ? `${channelType}.mix` : `${channelType}.${channel}.mix`
 					const faderLevel = instance.state.channels[key] || 0
 					const threshold = feedback.options.threshold
 
